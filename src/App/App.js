@@ -7,7 +7,6 @@ import './App.scss'
 const App = () => {
   return (
     <main>
-      <h1>floristic</h1>
       <Route
         exact path='/'
         render={HomeView}

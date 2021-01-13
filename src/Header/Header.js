@@ -1,6 +1,12 @@
+import SearchContainer from '../SearchContainer/SearchContainer'
+import './Header.scss'
+
 const Header = () => {
   return (
-    <h1>This is a header</h1>
+    <header className='header'>
+      <h1>floristic</h1>
+      <SearchContainer />
+    </header>
   )
 }
 
