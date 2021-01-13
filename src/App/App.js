@@ -8,12 +8,12 @@ const App = () => {
   return (
     <main>
       <Route
-        exact path='/'
-        render={HomeView}
+        path='/'
+        component={HomeView}
       />
       <Route 
-        exact path='/:plantName'
-        render={FeatureView}
+        path='/:plantName'
+        component={FeatureView}
       />
     </main>
   );

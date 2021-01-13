@@ -1,9 +1,10 @@
+
+
 export const getPlantList = async () => {
-  const response = await fetch(
-    'https://trefle.io/api/v1/plants?token=w76udTztX_89MySv3fO4fG41HD2yq9xhIRETq1KCXCg'
-  )
+  const url = 'http://localhost:8080/https://trefle.io/api/v1/plants?token=w76udTztX_89MySv3fO4fG41HD2yq9xhIRETq1KCXCg'
+  const response = await fetch(url)
   const data = await response.json()
-  return data
+  return data 
 }
 
 // export const getPlantDetails = (endpoint) => {
@@ -12,3 +13,5 @@ export const getPlantList = async () => {
 //       .then(response => response.json())
 //   )
 // }
+
+//NASA API KEY: v6dcyakOw4PSo43KWEFvueNUFVpuyWMZJ2cHbXEh

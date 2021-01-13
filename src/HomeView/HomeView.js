@@ -7,11 +7,11 @@ import { getPlantList } from '../apiCalls'
 const HomeView = () => {
   const [plantList, setPlantList] = useState([])
 
-  // useEffect(() => {
-  //   getPlantList()
-  //   .then(data => setPlantList(data.data))
-  //   .catch(error => console.log(error))
-  // }, [plantList])
+  useEffect(() => {
+    getPlantList()
+    .then(data => setPlantList(data.data))
+    .catch(error => console.log(error))
+  }, [plantList])
 
   return (
     <section>
