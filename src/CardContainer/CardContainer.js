@@ -1,8 +1,13 @@
-const CardContainer = () => {
+import PlantCard from './PlantCard/PlantCard'
+
+const CardContainer = ({ plantList }) => {
+  const plantCards = plantList.map(plant => {
+    return <PlantCard plant={plant} />
+  })
   return (
-    <div>
-      <p>this is where cards go</p>
-    </div>
+    <section>
+      { plantCards }
+    </section>
   )
 }
 

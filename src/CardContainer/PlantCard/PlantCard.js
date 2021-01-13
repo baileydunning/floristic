@@ -1,7 +1,7 @@
-const PlantCard = () => {
+const PlantCard = ({ plant }) => {
   return (
     <div>
-      <p>this is a card</p>
+      <p>{ plant['common_name'] }</p>
     </div>
   )
 }

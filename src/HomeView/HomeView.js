@@ -17,7 +17,7 @@ const HomeView = () => {
     <section>
       <Header />
       <ToggleCardView />
-      <CardContainer />
+      <CardContainer plantList={plantList}/>
     </section>
   )
 }
