@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Header from '../Header/Header'
 import ToggleCardView from '../ToggleCardView/ToggleCardView'
 import CardContainer from '../CardContainer/CardContainer'
+import Loading from '../Loading/Loading'
 import { getPlantList } from '../apiCalls'
 
 const HomeView = () => {
@@ -17,7 +18,10 @@ const HomeView = () => {
     <section>
       <Header />
       <ToggleCardView />
-      <CardContainer plantList={plantList}/>
+      {plantList.length > 0 ?
+      <CardContainer plantList={plantList}/> :
+      <Loading />
+    }
     </section>
   )
 }
