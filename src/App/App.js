@@ -1,10 +1,17 @@
 import React from 'react'
+import { Route } from 'react-router-dom'
+import HomeView from '../HomeView/HomeView'
+// import FeatureView from '../FeatureView'
 import './App.scss'
 
-function App() {
+const App = () => {
   return (
     <main>
-      <h1>Floristic</h1>
+      <h1>floristic</h1>
+      <Route
+        path='/'
+        render={HomeView}
+      />
     </main>
   );
 }
