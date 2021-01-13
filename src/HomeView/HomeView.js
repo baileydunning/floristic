@@ -1,6 +1,12 @@
+import Header from '../Header/Header'
+import SearchContainer from '../SearchContainer/SearchContainer'
+
 const HomeView = () => {
   return (
-    <h2>Home view</h2>
+    <section>
+      <Header />
+      <SearchContainer />
+    </section>
   )
 }
 
