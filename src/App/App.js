@@ -1,7 +1,7 @@
 import React from 'react'
 import { Route } from 'react-router-dom'
 import HomeView from '../HomeView/HomeView'
-// import FeatureView from '../FeatureView'
+import FeatureView from '../FeatureView/FeatureView'
 import './App.scss'
 
 const App = () => {
@@ -9,8 +9,12 @@ const App = () => {
     <main>
       <h1>floristic</h1>
       <Route
-        path='/'
+        exact path='/'
         render={HomeView}
+      />
+      <Route 
+        exact path='/:plantName'
+        render={FeatureView}
       />
     </main>
   );
