@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Header from '../Header/Header'
 import ToggleCardView from '../ToggleCardView/ToggleCardView'
 import CardContainer from '../CardContainer/CardContainer'
-import Loading from '../Loading/Loading'
+import Loading from './Loading/Loading'
 import { getPlantList } from '../apiCalls'
 
 const HomeView = () => {

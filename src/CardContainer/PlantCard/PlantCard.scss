@@ -24,7 +24,6 @@
   backface-visibility: hidden;
 }
 
-/* Style the front side */
 .flip-box-front {
   background-color: #bbb;
   color: black;
@@ -39,4 +38,8 @@
   background-color: lightgray;
   color: black;
   transform: rotateY(180deg);
+}
+
+.heart-icon {
+  width: 20%;
 }
