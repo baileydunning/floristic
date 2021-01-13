@@ -7,6 +7,7 @@ import { getPlantList } from '../apiCalls'
 
 const HomeView = () => {
   const [plantList, setPlantList] = useState([])
+  const [favorites, setFavorites] = useState([])
 
   useEffect(() => {
     getPlantList()
@@ -14,12 +15,19 @@ const HomeView = () => {
     .catch(error => console.log(error))
   }, [plantList])
 
+  const addToFavorites = (plant) => {
+    setFavorites([...favorites, plant])
+  }
+
   return (
     <section>
       <Header />
       <ToggleCardView />
       {plantList.length > 0 ?
-      <CardContainer plantList={plantList}/> :
+      <CardContainer 
+        plantList={plantList}
+        addToFavorites={addToFavorites}
+      /> :
       <Loading />
     }
     </section>

@@ -3,7 +3,7 @@ import heart from './heart.svg'
 import heartFill from './heart-fill.svg'
 import './PlantCard.scss'
 
-const PlantCard = ({ plant }) => {
+const PlantCard = ({ plant, addToFavorites }) => {
   return (
     <div className="flip-box">
       <div className="flip-box-inner">
@@ -14,10 +14,12 @@ const PlantCard = ({ plant }) => {
           <h2>{ plant['scientific_name'] }</h2>
           <h3>{ plant['common_name'] }</h3>
           <div>
-            <img 
-              src={heart}
-              className='heart-icon' 
-            />
+            <button onClick={() => addToFavorites(plant)}>
+              <img 
+                src={heart}
+                className='heart-icon' 
+              />
+            </button>
           </div>
         <Link to={`/${plant['slug']}`}>Learn More</Link>
         </div>
