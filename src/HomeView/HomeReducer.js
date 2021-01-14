@@ -4,7 +4,7 @@ export const initialState = {
   favorites: []
 }
 
-export const reducer = (state, action) => {
+export const homeReducer = (state, action) => {
   switch (action.type) {
     case 'FETCH_DATA':
       return { ...state, plantList: action.plantList }

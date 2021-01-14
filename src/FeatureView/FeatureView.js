@@ -1,6 +1,12 @@
+import { Link } from 'react-router-dom'
+
 const FeatureView = () => {
+  
   return (
-    <h2>Feature view</h2>
+    <section>
+    <h2>feature</h2>
+    <Link to='/'>Go back</Link>
+    </section>
   )
 }
 

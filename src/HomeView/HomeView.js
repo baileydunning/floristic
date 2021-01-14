@@ -1,13 +1,13 @@
 import React, { useEffect, useState, useReducer } from 'react'
-import Context from './HomeContext'
-import { initialState, reducer } from './HomeReducer'
+import HomeContext from './HomeContext'
+import { initialState, homeReducer } from './HomeReducer'
 import Header from '../Header/Header'
 import CardContainer from './CardContainer/CardContainer'
 import Loading from './Loading/Loading'
 import { getPlantList } from '../apiCalls'
 
 const HomeView = () => {
-  const [state, dispatch] = useReducer(reducer, initialState)
+  const [state, dispatch] = useReducer(homeReducer, initialState)
   const [cardsOnDisplay, setCardsOnDisplay] = useState(state.plantList)
 
   useEffect(() => {
@@ -45,7 +45,7 @@ const HomeView = () => {
   }
 
   return (
-    <Context.Provider value={state}>
+    <HomeContext.Provider value={state}>
       <section>
         <Header />
         <button onClick={toggleView}>Toggle view</button>
@@ -58,7 +58,7 @@ const HomeView = () => {
           <Loading />
         }
       </section>
-    </Context.Provider>
+    </HomeContext.Provider>
   )
 }
 

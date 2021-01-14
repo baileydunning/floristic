@@ -1,13 +1,13 @@
 import { useState, useContext } from 'react'
-import Context from '../../HomeContext'
 import { Link } from 'react-router-dom'
-import heart from './heart.svg'
-import heartFill from './heart-fill.svg'
+import HomeContext from '../../HomeContext'
+import heart from '../../../images/heart.svg'
+import heartFill from '../../../images/heart-fill.svg'
 import './PlantCard.scss'
 
 const PlantCard = ({ plant, addToFavorites, removeFromFavorites }) => {
   const [icon, setIcon] = useState(heart)
-  const context = useContext(Context)
+  const context = useContext(HomeContext)
 
   const handleClick = () => {
     const isFavorite = context.favorites.find(plantCard => {
@@ -24,12 +24,12 @@ const PlantCard = ({ plant, addToFavorites, removeFromFavorites }) => {
   }
 
   return (
-    <div className="flip-box">
-      <div className="flip-box-inner">
-        <div className="flip-box-front">
+    <div className='flip-box'>
+      <div className='flip-box-inner'>
+        <div className='flip-box-front'>
           <img src={ plant['image_url'] } alt='plant-img'/>
         </div>
-        <div className="flip-box-back">
+        <div className='flip-box-back'>
           <h2>{ plant['scientific_name'] }</h2>
           <h3>{ plant['common_name'] }</h3>
           <div>
@@ -41,7 +41,7 @@ const PlantCard = ({ plant, addToFavorites, removeFromFavorites }) => {
               />
             </button>
           </div>
-        <Link to={`/${plant['slug']}`}>Learn More</Link>
+        <Link to={`/${plant['id']}`}>Learn More</Link>
         </div>
       </div>
     </div>
