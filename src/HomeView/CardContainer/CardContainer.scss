@@ -1,0 +1,5 @@
+@import '../../index.scss';
+
+.card-container {
+  @include row-wrap
+}
