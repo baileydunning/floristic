@@ -15,16 +15,15 @@ const App = () => {
   }
 
   return (
-    <MainContext.Provider>
+    <MainContext.Provider value={state}>
       <Switch>
         <Route
-          exact
           path='/'
-          render={() => {
+          render={() => 
             <HomeView 
               selectPlant={selectPlant} 
             />
-          }}
+          }
         />
         <Route
           exact

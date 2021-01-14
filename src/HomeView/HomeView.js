@@ -6,7 +6,7 @@ import CardContainer from './CardContainer/CardContainer'
 import Loading from './Loading/Loading'
 import { getPlantList } from '../apiCalls'
 
-const HomeView = () => {
+const HomeView = ({ selectPlant }) => {
   const [state, dispatch] = useReducer(homeReducer, initialState)
   const [cardsOnDisplay, setCardsOnDisplay] = useState(state.plantList)
 
@@ -54,6 +54,7 @@ const HomeView = () => {
             cardsOnDisplay={cardsOnDisplay}
             addToFavorites={addToFavorites}
             removeFromFavorites={removeFromFavorites}
+            selectPlant={selectPlant}
           /> :
           <Loading />
         }
