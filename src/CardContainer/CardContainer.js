@@ -4,7 +4,8 @@ import './CardContainer.scss'
 const CardContainer = ({ cardsOnDisplay, addToFavorites }) => {
   const plantCards = cardsOnDisplay.map(plant => {
     return (
-      <PlantCard 
+      <PlantCard
+        key={plant.id} 
         plant={plant} 
         addToFavorites={addToFavorites} 
       />
