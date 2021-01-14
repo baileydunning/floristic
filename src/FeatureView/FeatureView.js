@@ -1,8 +1,9 @@
 import { useEffect, useReducer } from 'react'
 import { Link } from 'react-router-dom'
-import Loading from '../Loading/Loading'
-import { getPlant } from '../apiCalls'
 import { featureReducer, initialState } from './FeatureReducer'
+import Loading from '../Loading/Loading'
+import DistributionMap from './DistributionMap/DistributionMap'
+import { getPlant } from '../apiCalls'
 
 const FeatureView = ({ id }) => {
   const [state, dispatch] = useReducer(featureReducer, initialState)
@@ -32,6 +33,7 @@ const FeatureView = ({ id }) => {
           {state.plantData['main_species'].edible ? <p>✓ Edible</p> : <p>✘ Inedible</p>}
           {state.plantData['main_species'].vegetable ? <p>✓ Vegetable</p> : <p>✘ Not a Vegetable</p>}
           <img src={state.plantData['image_url']} />
+          <DistributionMap distributions={state.plantData['main_species'].distribution}/>
         </section> :
         <Loading />
       }

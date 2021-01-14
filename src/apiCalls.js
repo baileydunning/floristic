@@ -13,3 +13,10 @@ export const getPlant = async (id) => {
   const data = await response.json()
   return data
 }
+
+export const getGeocode = async (place) => {
+  const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${place}&key=AIzaSyBP9sSftzj-CWc5-ignMPWhd9JRTW5r_Js`
+  const response = await fetch(url)
+  const data = await response.json()
+  return data
+}
