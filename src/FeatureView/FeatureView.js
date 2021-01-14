@@ -7,9 +7,11 @@ const FeatureView = ({ id }) => {
   const [plantData, setPlantData] = useState()
 
   useEffect(() => {
-    getPlant(id)
-      .then(data => setPlantData(data.data))
-      .catch(error => console.log(error))
+    if (!plantData) {
+      getPlant(id)
+        .then(data => setPlantData(data.data))
+        .catch(error => console.log(error))
+    }
   }, [id])
 
   return (

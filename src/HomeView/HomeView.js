@@ -11,9 +11,11 @@ const HomeView = ({ selectPlant }) => {
   const [cardsOnDisplay, setCardsOnDisplay] = useState(state.plantList)
 
   useEffect(() => {
-    getPlantList()
-      .then(data => handleFetch(data.data))
-      .catch(error => console.log(error))
+    if (state.plantList.length === 0) {
+      getPlantList()
+        .then(data => handleFetch(data.data))
+        .catch(error => console.log(error))
+    }
 
     if (state.view === 'all') {
       setCardsOnDisplay(state.plantList)
@@ -47,7 +49,7 @@ const HomeView = ({ selectPlant }) => {
   return (
     <HomeContext.Provider value={state}>
       <section>
-        <Header toggleView={toggleView}/>
+        <Header toggleView={toggleView} />
         {state.plantList.length > 0 ?
           <CardContainer
             cardsOnDisplay={cardsOnDisplay}
