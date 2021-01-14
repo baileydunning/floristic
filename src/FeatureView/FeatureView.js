@@ -12,7 +12,7 @@ const FeatureView = ({ id }) => {
         .then(data => setPlantData(data.data))
         .catch(error => console.log(error))
     }
-  }, [id])
+  }, [id, plantData])
 
   return (
     <section>

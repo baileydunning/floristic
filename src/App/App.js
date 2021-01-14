@@ -12,7 +12,7 @@ const App = () => {
     if (location.pathname !== '/') {
       setPlantId(location.pathname.split('/')[1])
     }
-  }, [plantId])
+  }, [plantId, location.pathname])
 
   const selectPlant = (plant) => {
     setPlantId(plant.id)
