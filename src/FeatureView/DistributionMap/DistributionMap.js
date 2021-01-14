@@ -64,5 +64,3 @@ const DistributionMap = ({ distributions }) => {
 
 
 export default DistributionMap
-
-//609dd641213e4ea198cebb55d1bf7801

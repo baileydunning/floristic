@@ -21,6 +21,12 @@ const FeatureView = ({ id }) => {
     dispatch(action)
   }
 
+  const listLocations = (type) => {
+    return state.plantData['main_species'].distribution[type].map(place => {
+      return <li>{ place }</li>
+    })
+  }
+
   return (
     <section>
       {state.plantData ?
@@ -30,10 +36,18 @@ const FeatureView = ({ id }) => {
           <h3>Genus: {state.plantData.genus.name}</h3>
           <h3>Family: {state.plantData.family.name}</h3>
           <p><b>Observations: </b>{state.plantData.observations}</p>
+          <p><b>Native: </b></p>
+          <ul>
+            { listLocations('native') }
+          </ul>
+          <p><b>Introduced: </b></p>
+          <ul>
+            {listLocations('introduced')}
+          </ul>
           {state.plantData['main_species'].edible ? <p>✓ Edible</p> : <p>✘ Inedible</p>}
           {state.plantData['main_species'].vegetable ? <p>✓ Vegetable</p> : <p>✘ Not a Vegetable</p>}
           <img src={state.plantData['image_url']} />
-          <DistributionMap distributions={state.plantData['main_species'].distribution}/>
+          {/* <DistributionMap distributions={state.plantData['main_species'].distribution}/> */}
         </section> :
         <Loading />
       }
