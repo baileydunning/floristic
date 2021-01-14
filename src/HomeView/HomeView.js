@@ -2,7 +2,7 @@ import React, { useEffect, useState, useReducer } from 'react'
 import Context from './HomeContext'
 import { initialState, reducer } from './HomeReducer'
 import Header from '../Header/Header'
-import CardContainer from '../CardContainer/CardContainer'
+import CardContainer from './CardContainer/CardContainer'
 import Loading from './Loading/Loading'
 import { getPlantList } from '../apiCalls'
 

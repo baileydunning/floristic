@@ -1,5 +1,5 @@
 import { useState, useContext } from 'react'
-import Context from '../../HomeView/HomeContext'
+import Context from '../../HomeContext'
 import { Link } from 'react-router-dom'
 import heart from './heart.svg'
 import heartFill from './heart-fill.svg'

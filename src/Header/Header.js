@@ -1,4 +1,4 @@
-import SearchContainer from '../SearchContainer/SearchContainer'
+import SearchContainer from './SearchContainer/SearchContainer'
 import './Header.scss'
 
 const Header = () => {
