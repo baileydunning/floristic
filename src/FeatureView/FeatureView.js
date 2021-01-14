@@ -1,11 +1,19 @@
+import { useEffect, useState } from 'react' 
 import { Link } from 'react-router-dom'
-// import 
+import { getPlant } from '../apiCalls'
 
 const FeatureView = ({ id }) => {
-  
+  const [plantData, setPlantData] = useState()
+
+  useEffect(() => {
+    getPlant(id)
+      .then(data => setPlantData(data.data))
+      .catch(error => console.log(error))
+  }, [id])
+
   return (
     <section>
-    <h2>feature</h2>
+    <h1>{plantData['scientific_name']}</h1>
     <Link to='/'>Go back</Link>
     </section>
   )
