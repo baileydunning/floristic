@@ -41,7 +41,9 @@ const PlantCard = ({ plant, addToFavorites, removeFromFavorites, selectPlant }) 
               />
             </button>
           </div>
-          <Link to={`/${plant['id']}`} onClick={() => selectPlant(plant.id)}>Learn More</Link>
+          <button onClick={() => selectPlant(plant)}>
+            <Link to={`/${plant['id']}`}>Learn More</Link>
+          </button>
         </div>
       </div>
     </div>

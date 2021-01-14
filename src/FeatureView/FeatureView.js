@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
+// import 
 
-const FeatureView = () => {
+const FeatureView = ({ id }) => {
   
   return (
     <section>

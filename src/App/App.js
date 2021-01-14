@@ -1,23 +1,28 @@
-import React, { useReducer } from 'react'
-import { Switch, Route } from 'react-router-dom'
-import MainContext from './MainContext'
-import { initialState, mainReducer } from './MainReducer'
+import React, { useEffect, useState } from 'react'
+import { Switch, Route, useLocation } from 'react-router-dom'
 import HomeView from '../HomeView/HomeView'
 import FeatureView from '../FeatureView/FeatureView'
 import './App.scss'
 
 const App = () => {
-  const [state, dispatch] = useReducer(mainReducer, initialState)
+  const [plantId, setPlantId] = useState(0)
+  const location = useLocation()
 
-  const selectPlant = (id) => {
-    const action = { type: 'SELECT_PLANT' }
-    dispatch(action)
+  useEffect(() => {
+    if (location.pathname !== '/') {
+      setPlantId(location.pathname.split('/')[1])
+    }
+  }, [plantId])
+
+  const selectPlant = (plant) => {
+    setPlantId(plant.id)
   }
 
   return (
-    <MainContext.Provider value={state}>
+    <main>
       <Switch>
         <Route
+          exact
           path='/'
           render={() => 
             <HomeView 
@@ -27,15 +32,15 @@ const App = () => {
         />
         <Route
           exact
-          path='/:id'
-          render={() => {
+          path={`/${plantId}`}
+          render={() => 
             <FeatureView
-              id={state.plantId}
+              id={plantId}
             />
-          }}
+          }
         />
       </Switch>
-    </MainContext.Provider>
+    </main>
   );
 }
 
