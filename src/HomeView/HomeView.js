@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useReducer } from 'react'
-import Context from './Context'
-import { initialState, reducer } from './Reducer'
+import Context from './HomeContext'
+import { initialState, reducer } from './HomeReducer'
 import Header from '../Header/Header'
 import CardContainer from '../CardContainer/CardContainer'
 import Loading from './Loading/Loading'
@@ -14,13 +14,13 @@ const HomeView = () => {
     getPlantList()
       .then(data => handleFetch(data.data))
       .catch(error => console.log(error))
-    
+
     if (state.view === 'all') {
       setCardsOnDisplay(state.plantList)
     } else {
       setCardsOnDisplay(state.favorites)
     }
-  }, [state.view, state.plantList])
+  }, [state.view, state.plantList, state.favorites])
 
   const handleFetch = (data) => {
     const action = { type: 'FETCH_DATA', plantList: data }
@@ -35,15 +35,17 @@ const HomeView = () => {
   const addToFavorites = (plant) => {
     const action = { type: 'ADD_TO_FAVORITES', plant: plant }
     dispatch(action)
+    console.log('added plant to favorites')
   }
 
   const removeFromFavorites = (id) => {
     const action = { type: 'REMOVE_FROM_FAVORITES', id: id }
     dispatch(action)
+    console.log('removed plant from favorites')
   }
 
   return (
-    <Context.Provider value={state.view}>
+    <Context.Provider value={state}>
       <section>
         <Header />
         <button onClick={toggleView}>Toggle view</button>

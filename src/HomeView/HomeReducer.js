@@ -15,7 +15,7 @@ export const reducer = (state, action) => {
       return { ...state, favorites: [...state.favorites, action.plant] }
     case 'REMOVE_FROM_FAVORITES':
       const favPlants = state.favorites.filter(plant => plant.id !== action.id)
-      return { ...state, ideas: favPlants }
+      return { ...state, favorites: favPlants }
     default:
       return state
   }

@@ -8,7 +8,7 @@ const CardContainer = ({ cardsOnDisplay, addToFavorites, removeFromFavorites }) 
         key={plant.id} 
         plant={plant} 
         addToFavorites={addToFavorites}
-        removeFromFavorites={removeFromFavorites} 
+        removeFromFavorites={removeFromFavorites}
       />
     )
   })
