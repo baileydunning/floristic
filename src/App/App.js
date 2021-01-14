@@ -5,7 +5,7 @@ import FeatureView from '../FeatureView/FeatureView'
 import './App.scss'
 
 const App = () => {
-  const [plantId, setPlantId] = useState(0)
+  const [plantId, setPlantId] = useState(null)
   const location = useLocation()
 
   useEffect(() => {
@@ -30,7 +30,7 @@ const App = () => {
             />
           }
         />
-        <Route
+        {plantId && <Route
           exact
           path={`/${plantId}`}
           render={() => 
@@ -38,7 +38,7 @@ const App = () => {
               id={plantId}
             />
           }
-        />
+        />}
       </Switch>
     </main>
   );

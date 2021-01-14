@@ -3,7 +3,7 @@ import HomeContext from './HomeContext'
 import { initialState, homeReducer } from './HomeReducer'
 import Header from '../Header/Header'
 import CardContainer from './CardContainer/CardContainer'
-import Loading from './Loading/Loading'
+import Loading from '../Loading/Loading'
 import { getPlantList } from '../apiCalls'
 
 const HomeView = ({ selectPlant }) => {
