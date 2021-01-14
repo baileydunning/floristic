@@ -20,7 +20,7 @@ const HomeView = () => {
     } else {
       setCardsOnDisplay(state.favorites)
     }
-  }, [state.view])
+  }, [state.view, state.plantList])
 
   const handleFetch = (data) => {
     const action = { type: 'FETCH_DATA', plantList: data }
@@ -37,6 +37,11 @@ const HomeView = () => {
     dispatch(action)
   }
 
+  const removeFromFavorites = (id) => {
+    const action = { type: 'REMOVE_FROM_FAVORITES', id: id }
+    dispatch(action)
+  }
+
   return (
     <Context.Provider value={state.view}>
       <section>
@@ -46,6 +51,7 @@ const HomeView = () => {
           <CardContainer
             cardsOnDisplay={cardsOnDisplay}
             addToFavorites={addToFavorites}
+            removeFromFavorites={removeFromFavorites}
           /> :
           <Loading />
         }
