@@ -1,17 +1,17 @@
-import { useContext, useState } from 'react'
-import HomeContext from '../../HomeContext'
+import { useState } from 'react'
 import { searchPlants } from '../../../apiCalls'
 
 const SearchBar = ({ handleFetch }) => {
   const [userInput, setUserInput] = useState('')
-  const context = useContext(HomeContext)
   
   const fetchQueryResults = (event) => {
     event.preventDefault()
     searchPlants(userInput)
-    .then(data => handleFetch(data.data))
+    .then(data => {
+      handleFetch(data.data)
+      console.log('fetch query results')
+    })
     .catch(error => console.log(error))
-    console.log('fetch query results')
   }
 
   return (

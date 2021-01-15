@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import HomeContext from '../../HomeContext'
 import heart from '../../../images/heart.svg'
 import heartFill from '../../../images/heart-fill.svg'
+import photoNotAvailable from '../../../images/picture-not-available.png'
 import './PlantCard.scss'
 
 const PlantCard = ({ plant, addToFavorites, removeFromFavorites }) => {
@@ -27,7 +28,10 @@ const PlantCard = ({ plant, addToFavorites, removeFromFavorites }) => {
     <div className='flip-box'>
       <div className='flip-box-inner'>
         <div className='flip-box-front'>
-          <img src={ plant['image_url'] } alt='plant-img'/>
+          {plant['image_url'] ? 
+            <img src={ plant['image_url'] } alt='plant-img'/> :
+            <img src={ photoNotAvailable } alt='plant-img' />
+          }
         </div>
         <div className='flip-box-back'>
           <h2>{ plant['scientific_name'] }</h2>

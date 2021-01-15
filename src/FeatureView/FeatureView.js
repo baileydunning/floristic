@@ -2,7 +2,6 @@ import { useEffect, useReducer } from 'react'
 import { Link } from 'react-router-dom'
 import { featureReducer, initialState } from './FeatureReducer'
 import Loading from '../Loading/Loading'
-// import DistributionMap from './DistributionMap/DistributionMap'
 import { getPlant } from '../apiCalls'
 import './FeatureView.scss'
 
@@ -23,9 +22,13 @@ const FeatureView = ({ id }) => {
   }
 
   const listLocations = (type) => {
-    return state.plantData['main_species'].distributions[type].map(place => {
-      return <li key={place.id}>{place.name}</li>
-    })
+    if (state.plantData['main_species'].distributions[type]) {
+      return state.plantData['main_species'].distributions[type].map(place => {
+        return <li key={place.id}>{place.name}</li>
+      })
+    } else {
+      return 'Unknown'
+    }
   }
 
   return (
@@ -56,7 +59,6 @@ const FeatureView = ({ id }) => {
             {state.plantData['main_species'].vegetable ? <p>✓ Vegetable</p> : <p>✘ Not a Vegetable</p>}
           </div>
           <img src={state.plantData['image_url']} />
-          {/* <DistributionMap distributions={state.plantData['main_species'].distribution}/> */}
         </section> :
         <Loading />
       }

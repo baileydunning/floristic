@@ -1,3 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Butterfly+Kids&family=Montserrat+Alternates:wght@400;700&family=Viga&display=swap');
+
+$primaryFont: 'Butterfly Kids', cursive;
+$secondaryFont: 'Viga', sans-serif;
+$paragraphFont: 'Montserrat Alternates', sans-serif;
+
+body {
+  margin: 0;
+}
+
+h1 {
+  font-family: $primaryFont;
+  font-size: 5em;
+  letter-spacing: 0.3em;
+  text-shadow: 5px 5px 10px black;
+}
+
+h2, h3 {
+  font-family: $secondaryFont;
+}
+
+p, li, button {
+  font-family: $paragraphFont;
+}
+
 @mixin row-wrap {
   display: flex;
   flex-direction: row;
