@@ -1,7 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Butterfly+Kids&family=Montserrat+Alternates:wght@400;700&family=Viga&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat+Alternates:ital,wght@0,400;0,700;1,400&family=Nixie+One&family=Viga&display=swap');
 
-$primaryFont: 'Butterfly Kids', cursive;
-$secondaryFont: 'Viga', sans-serif;
+$primaryFont: 'Nixie One', cursive;
 $paragraphFont: 'Montserrat Alternates', sans-serif;
 
 body {
@@ -12,11 +11,16 @@ h1 {
   font-family: $primaryFont;
   font-size: 5em;
   letter-spacing: 0.3em;
-  text-shadow: 5px 5px 10px black;
 }
 
-h2, h3 {
-  font-family: $secondaryFont;
+h2 {
+  font-family: $primaryFont;
+  font-size: 2em;
+}
+
+h3 {
+  font-family: $primaryFont;
+  font-size: 1em;
 }
 
 p, li, button {

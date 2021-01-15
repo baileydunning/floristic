@@ -25,7 +25,7 @@ const PlantCard = ({ plant, addToFavorites, removeFromFavorites }) => {
   }
 
   return (
-    <div className='flip-box'>
+    <div className='plant-card'>
       <div className='flip-box-inner'>
         <div className='flip-box-front'>
           {plant['image_url'] ? 

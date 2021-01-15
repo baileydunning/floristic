@@ -35,7 +35,7 @@ const FeatureView = ({ id }) => {
     <section>
       {state.plantData ?
         <section>
-          <h1>{state.plantData['scientific_name']}:</h1>
+          <h2>{state.plantData['scientific_name']}:</h2>
           <h2>{state.plantData['common_name']} from the {state.plantData['family_common_name']}</h2>
           <h3>Genus: {state.plantData.genus.name}</h3>
           <h3>Family: {state.plantData.family.name}</h3>
