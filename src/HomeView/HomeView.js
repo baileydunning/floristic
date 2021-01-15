@@ -75,7 +75,7 @@ const HomeView = () => {
           /> :
           <Loading />
         }
-        <button onClick={() => jumpToPage(state.pageNumber += 1)}>Next page</button>
+        {state.pageNumber < 18879 && <button onClick={() => jumpToPage(state.pageNumber += 1)}>Next page</button>}
         <p>{state.pageNumber}</p>
         {state.pageNumber > 1 && <button onClick={() => jumpToPage(state.pageNumber -= 1)}>Previous page</button>}
       </section>

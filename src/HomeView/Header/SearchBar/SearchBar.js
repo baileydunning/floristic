@@ -4,14 +4,14 @@ import { searchPlants } from '../../../apiCalls'
 
 const SearchBar = ({ handleFetch }) => {
   const [userInput, setUserInput] = useState('')
-  // const context = useContext(HomeContext)
+  const context = useContext(HomeContext)
   
   const fetchQueryResults = (event) => {
-    console.log('fetch query results')
     event.preventDefault()
     searchPlants(userInput)
-      .then(data => handleFetch(data.data))
-      .catch(error => console.log(error))
+    .then(data => handleFetch(data.data))
+    .catch(error => console.log(error))
+    console.log('fetch query results')
   }
 
   return (
