@@ -24,7 +24,7 @@ const FeatureView = ({ id }) => {
 
   const listLocations = (type) => {
     return state.plantData['main_species'].distributions[type].map(place => {
-      return <li><Link to={`/${place.slug}`} key={place.id}>{place.name}</Link></li>
+      return <li key={place.id}>{place.name}</li>
     })
   }
 

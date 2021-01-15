@@ -5,7 +5,7 @@ import heart from '../../../images/heart.svg'
 import heartFill from '../../../images/heart-fill.svg'
 import './PlantCard.scss'
 
-const PlantCard = ({ plant, addToFavorites, removeFromFavorites, selectPlant }) => {
+const PlantCard = ({ plant, addToFavorites, removeFromFavorites }) => {
   const [icon, setIcon] = useState(heart)
   const context = useContext(HomeContext)
 
@@ -41,7 +41,7 @@ const PlantCard = ({ plant, addToFavorites, removeFromFavorites, selectPlant }) 
               />
             </button>
           </div>
-          <button onClick={() => selectPlant(plant)}>
+          <button>
             <Link to={`/${plant['id']}`}>Learn More</Link>
           </button>
         </div>

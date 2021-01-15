@@ -6,27 +6,36 @@ import CardContainer from './CardContainer/CardContainer'
 import Loading from '../Loading/Loading'
 import { getPlantList } from '../apiCalls'
 
-const HomeView = ({ selectPlant }) => {
+const HomeView = () => {
   const [state, dispatch] = useReducer(homeReducer, initialState)
   const [cardsOnDisplay, setCardsOnDisplay] = useState(state.plantList)
 
   useEffect(() => {
-    if (state.plantList.length === 0) {
-      getPlantList()
-        .then(data => handleFetch(data.data))
-        .catch(error => console.log(error))
-    }
-
+    (state.plantList.length === 0) && fetchPlantList()
+    
     if (state.view === 'all') {
       setCardsOnDisplay(state.plantList)
     } else {
       setCardsOnDisplay(state.favorites)
     }
-  }, [state.view, state.plantList, state.favorites])
+  }, [state.view, state.plantList, state.favorites, state.pageNumber])
 
+  const fetchPlantList = () => {
+    getPlantList(state.pageNumber)
+      .then(data => handleFetch(data.data))
+      .catch(error => console.log(error))
+    console.log('fetch')
+  }
+  
   const handleFetch = (data) => {
     const action = { type: 'FETCH_DATA', plantList: data }
     dispatch(action)
+  }
+
+  const jumpToPage = (page) => {
+    const action = { type: 'JUMP_TO_PAGE', pageNumber: page }
+    dispatch(action)
+    fetchPlantList()
   }
 
   const toggleView = () => {
@@ -55,10 +64,12 @@ const HomeView = ({ selectPlant }) => {
             cardsOnDisplay={cardsOnDisplay}
             addToFavorites={addToFavorites}
             removeFromFavorites={removeFromFavorites}
-            selectPlant={selectPlant}
           /> :
           <Loading />
         }
+        <button onClick={() => jumpToPage(state.pageNumber += 1)}>Next page</button>
+        <p>{state.pageNumber}</p>
+        {state.pageNumber > 1 && <button onClick={() => jumpToPage(state.pageNumber -= 1)}>Previous page</button>}
       </section>
     </HomeContext.Provider>
   )
