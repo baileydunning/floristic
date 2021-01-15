@@ -58,7 +58,10 @@ const HomeView = () => {
   return (
     <HomeContext.Provider value={state}>
       <section>
-        <Header toggleView={toggleView} />
+        <Header
+          handleFetch={handleFetch} 
+          toggleView={toggleView} 
+        />
         {state.plantList.length > 0 ?
           <CardContainer
             cardsOnDisplay={cardsOnDisplay}
