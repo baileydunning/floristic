@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react'
+import { useState, useContext, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import HomeContext from '../../HomeContext'
 import heart from '../../../images/heart.svg'

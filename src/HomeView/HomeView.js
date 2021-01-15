@@ -9,6 +9,7 @@ import { getPlantList } from '../apiCalls'
 const HomeView = () => {
   const [state, dispatch] = useReducer(homeReducer, initialState)
   const [cardsOnDisplay, setCardsOnDisplay] = useState(state.plantList)
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     (state.plantList.length === 0) && fetchPlantList()
@@ -21,8 +22,12 @@ const HomeView = () => {
   }, [state.view, state.plantList, state.favorites, state.pageNumber])
 
   const fetchPlantList = () => {
+    setLoading(true)
     getPlantList(state.pageNumber)
-      .then(data => handleFetch(data.data))
+      .then(data => {
+        handleFetch(data.data)
+        setLoading(false)
+      })
       .catch(error => console.log(error))
     console.log('fetch')
   }
@@ -62,7 +67,7 @@ const HomeView = () => {
           handleFetch={handleFetch} 
           toggleView={toggleView} 
         />
-        {state.plantList.length > 0 ?
+        {!loading ?
           <CardContainer
             cardsOnDisplay={cardsOnDisplay}
             addToFavorites={addToFavorites}

@@ -1,6 +1,6 @@
 export const initialState = {
   view: 'all',
-  pageNumber: 1,
+  pageNumber: 16,
   plantList: [],
   favorites: []
 }
