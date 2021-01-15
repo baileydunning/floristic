@@ -3,7 +3,7 @@ import './Loading.scss'
 const Loading = () => {
   return (
     <section>
-      <h3 className='loading-txt'>Loading...</h3>
+      <h2 className='loading-txt'>Excuse me while I fetch<br />the data you requested</h2>
       <div className="loading">
         <div></div>
         <div></div>

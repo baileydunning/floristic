@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useReducer } from 'react'
 import HomeContext from './HomeContext'
 import { initialState, homeReducer } from './HomeReducer'
-import Header from '../Header/Header'
+import Header from './Header/Header'
 import CardContainer from './CardContainer/CardContainer'
 import Loading from '../Loading/Loading'
 import { getPlantList } from '../apiCalls'

@@ -20,17 +20,13 @@ const App = () => {
         <Route
           exact
           path='/'
-          render={() => 
-            <HomeView />
-          }
+          component={HomeView}
         />
         <Route
           exact
           path='/:id'
           render={() => 
-            <FeatureView
-              id={routeId}
-            />
+            <FeatureView id={routeId} />
           }
         />
       </Switch>
