@@ -3,7 +3,7 @@
 *On your terminal*:
 
 + `git clone git@github.com:baileydunning/floristic.git`
-+ `cd floristic` 
++ `cd floristic && npm install` 
    + Tab #1: `npm start`
    + Tab #2: `cd node_modules/cors-anywhere/lib/ && npm run start`
 
