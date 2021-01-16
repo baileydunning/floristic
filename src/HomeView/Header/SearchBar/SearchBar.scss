@@ -1,0 +1,35 @@
+@import '../../../index.scss';
+
+.search-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 60vw;
+  margin: 2%;
+}
+
+label {
+  text-align: center;
+}
+
+.submit {
+  background-color: darkblue;
+  font-family: $primaryFont;
+  color: white;
+  border: none;
+  outline: none;
+  height: 40%;
+  width: 10%;
+  border-radius: 10%;
+  &:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+    transition-duration: 0.7s;
+  }
+}
+
+.search-input {
+  width: 50%;
+  margin: 2%;
+}

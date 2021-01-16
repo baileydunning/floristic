@@ -6,10 +6,8 @@ const Header = ({ handleFetch, toggleView }) => {
   return (
     <header className='header'>
       <h1 className='title'>floristic</h1>
-      <section className='user-interaction'>
-        <SearchBar handleFetch={handleFetch} />
-        <ToggleView toggleView={toggleView} />
-      </section>
+      <SearchBar handleFetch={handleFetch} />
+      <ToggleView toggleView={toggleView} />
     </header>
   )
 }

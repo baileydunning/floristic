@@ -23,7 +23,7 @@ h3 {
   font-size: 1em;
 }
 
-p, li, button {
+p, li, button, label, ::placeholder {
   font-family: $paragraphFont;
 }
 

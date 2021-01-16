@@ -1,0 +1,19 @@
+@import '../../index.scss';
+
+.footer {
+  @include row-wrap;
+  justify-content: center;
+  height: 20vh;
+  background-color: gray;
+  align-items: center;
+  p {
+    font-size: 2em;
+    padding: 0 5%;
+  }
+  button {
+    border: none;
+    font-size: xx-large;
+    background-color: lightblue;
+    height: 50%;
+  }
+}
