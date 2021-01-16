@@ -6,15 +6,10 @@ import heartFill from '../../../images/heart-fill.svg'
 import photoNotAvailable from '../../../images/picture-not-available.png'
 import './PlantCard.scss'
 
-const PlantCard = ({ plant, addToFavorites, removeFromFavorites }) => {
+const PlantCard = ({ plant, isFavorite, addToFavorites, removeFromFavorites }) => {
   const [icon, setIcon] = useState(heart)
-  const context = useContext(HomeContext)
-
+  
   const handleClick = () => {
-    const isFavorite = context.favorites.find(plantCard => {
-      return plantCard.id === plant.id
-    })
-
     if (!isFavorite) {
       addToFavorites(plant)
       setIcon(heartFill)

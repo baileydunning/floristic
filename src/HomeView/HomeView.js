@@ -10,6 +10,7 @@ import { getPlantList } from '../apiCalls'
 const HomeView = () => {
   const [state, dispatch] = useReducer(homeReducer, initialState)
   const [cardsOnDisplay, setCardsOnDisplay] = useState(state.plantList)
+  const [favorites, setFavorites] = useState([])
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
@@ -18,9 +19,9 @@ const HomeView = () => {
     if (state.view === 'all') {
       setCardsOnDisplay(state.plantList)
     } else {
-      setCardsOnDisplay(state.favorites)
+      setCardsOnDisplay(favorites)
     }
-  }, [state.view, state.plantList, state.favorites, state.pageNumber])
+  }, [state.view, state.plantList, favorites, state.pageNumber])
 
   const fetchPlantList = () => {
     setLoading(true)
@@ -50,14 +51,14 @@ const HomeView = () => {
   }
 
   const addToFavorites = (plant) => {
-    const action = { type: 'ADD_TO_FAVORITES', plant: plant }
-    dispatch(action)
+    setFavorites([...favorites, plant])
+
     console.log('added plant to favorites')
   }
 
   const removeFromFavorites = (id) => {
-    const action = { type: 'REMOVE_FROM_FAVORITES', id: id }
-    dispatch(action)
+    const favPlants = state.favorites.filter(plant => plant.id !== id)
+    setFavorites(favPlants)
     console.log('removed plant from favorites')
   }
 
@@ -70,6 +71,7 @@ const HomeView = () => {
         />
         {!loading ?
           <CardContainer
+            favorites={favorites}
             cardsOnDisplay={cardsOnDisplay}
             addToFavorites={addToFavorites}
             removeFromFavorites={removeFromFavorites}
