@@ -10,7 +10,6 @@ const SearchBar = ({ handleFetch }) => {
     .then(data => {
       handleFetch(data.data)
       setUserInput('')
-      console.log('fetch query results')
     })
     .catch(error => console.log(error))
   }
