@@ -1,32 +1,47 @@
 import React, { useEffect, useState, useReducer } from 'react'
 import HomeContext from './HomeContext'
 import { initialState, homeReducer } from './HomeReducer'
-import Header from '../Header/Header'
+import Header from './Header/Header'
 import CardContainer from './CardContainer/CardContainer'
 import Loading from '../Loading/Loading'
+import Footer from './Footer/Footer'
 import { getPlantList } from '../apiCalls'
 
-const HomeView = ({ selectPlant }) => {
+const HomeView = () => {
   const [state, dispatch] = useReducer(homeReducer, initialState)
   const [cardsOnDisplay, setCardsOnDisplay] = useState(state.plantList)
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    if (state.plantList.length === 0) {
-      getPlantList()
-        .then(data => handleFetch(data.data))
-        .catch(error => console.log(error))
-    }
-
+    (state.plantList.length === 0) && fetchPlantList()
+    
     if (state.view === 'all') {
       setCardsOnDisplay(state.plantList)
     } else {
       setCardsOnDisplay(state.favorites)
     }
-  }, [state.view, state.plantList, state.favorites])
+  }, [state.view, state.plantList, state.favorites, state.pageNumber])
 
+  const fetchPlantList = () => {
+    setLoading(true)
+    getPlantList(state.pageNumber)
+      .then(data => {
+        handleFetch(data.data)
+        setLoading(false)
+      })
+      .catch(error => console.log(error))
+    console.log('fetch')
+  }
+  
   const handleFetch = (data) => {
     const action = { type: 'FETCH_DATA', plantList: data }
     dispatch(action)
+  }
+
+  const jumpToPage = (page) => {
+    const action = { type: 'JUMP_TO_PAGE', pageNumber: page }
+    dispatch(action)
+    fetchPlantList()
   }
 
   const toggleView = () => {
@@ -49,16 +64,19 @@ const HomeView = ({ selectPlant }) => {
   return (
     <HomeContext.Provider value={state}>
       <section>
-        <Header toggleView={toggleView} />
-        {state.plantList.length > 0 ?
+        <Header
+          handleFetch={handleFetch} 
+          toggleView={toggleView} 
+        />
+        {!loading ?
           <CardContainer
             cardsOnDisplay={cardsOnDisplay}
             addToFavorites={addToFavorites}
             removeFromFavorites={removeFromFavorites}
-            selectPlant={selectPlant}
           /> :
           <Loading />
         }
+        <Footer jumpToPage={jumpToPage}/>
       </section>
     </HomeContext.Provider>
   )

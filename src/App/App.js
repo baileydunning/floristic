@@ -5,18 +5,14 @@ import FeatureView from '../FeatureView/FeatureView'
 import './App.scss'
 
 const App = () => {
-  const [plantId, setPlantId] = useState(null)
+  const [routeId, setRouteId] = useState(null)
   const location = useLocation()
 
   useEffect(() => {
     if (location.pathname !== '/') {
-      setPlantId(location.pathname.split('/')[1])
+      setRouteId(location.pathname.split('/')[1])
     }
-  }, [plantId])
-
-  const selectPlant = (plant) => {
-    setPlantId(plant.id)
-  }
+  }, [routeId, location.pathname])
 
   return (
     <main>
@@ -24,24 +20,18 @@ const App = () => {
         <Route
           exact
           path='/'
+          component={HomeView}
+        />
+        <Route
+          exact
+          path='/:id'
           render={() => 
-            <HomeView 
-              selectPlant={selectPlant} 
-            />
+            <FeatureView id={routeId} />
           }
         />
-        {plantId && <Route
-          exact
-          path={`/${plantId}`}
-          render={() => 
-            <FeatureView
-              id={plantId}
-            />
-          }
-        />}
       </Switch>
     </main>
-  );
+  )
 }
 
 export default App

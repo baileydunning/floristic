@@ -1,7 +1,7 @@
 import PlantCard from './PlantCard/PlantCard'
 import './CardContainer.scss'
 
-const CardContainer = ({ cardsOnDisplay, addToFavorites, removeFromFavorites, selectPlant }) => {
+const CardContainer = ({ cardsOnDisplay, addToFavorites, removeFromFavorites }) => {
   const plantCards = cardsOnDisplay.map(plant => {
     return (
       <PlantCard
@@ -9,7 +9,6 @@ const CardContainer = ({ cardsOnDisplay, addToFavorites, removeFromFavorites, se
         plant={plant} 
         addToFavorites={addToFavorites}
         removeFromFavorites={removeFromFavorites}
-        selectPlant={selectPlant}
       />
     )
   })

@@ -1,7 +1,7 @@
 import { useContext, useState } from 'react'
-import HomeContext from '../../HomeView/HomeContext'
-import heartFill from '../../images/heart-fill.svg'
-import leaf from '../../images/leaf.svg'
+import HomeContext from '../../HomeContext'
+import heartFill from '../../../images/heart-fill.svg'
+import leaf from '../../../images/leaf.svg'
 import './ToggleView.scss'
 
 const ToggleView = ({ toggleView }) => {
