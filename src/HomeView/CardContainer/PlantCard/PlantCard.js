@@ -1,4 +1,4 @@
-import { useState, useContext, useEffect } from 'react'
+import { useState, useContext } from 'react'
 import { Link } from 'react-router-dom'
 import HomeContext from '../../HomeContext'
 import heart from '../../../images/heart.svg'
@@ -26,14 +26,14 @@ const PlantCard = ({ plant, addToFavorites, removeFromFavorites }) => {
 
   return (
     <div className='plant-card'>
-      <div className='flip-box-inner'>
-        <div className='flip-box-front'>
+      <div className='plant-card-inner'>
+        <div className='plant-card-front'>
           {plant['image_url'] ? 
             <img src={ plant['image_url'] } alt='plant-img'/> :
             <img src={ photoNotAvailable } alt='plant-img' />
           }
         </div>
-        <div className='flip-box-back'>
+        <div className='plant-card-back'>
           <h2>{ plant['scientific_name'] }</h2>
           <h3>{ plant['common_name'] }</h3>
           <div>

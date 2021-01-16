@@ -4,6 +4,7 @@ import { initialState, homeReducer } from './HomeReducer'
 import Header from './Header/Header'
 import CardContainer from './CardContainer/CardContainer'
 import Loading from '../Loading/Loading'
+import Footer from './Footer/Footer'
 import { getPlantList } from '../apiCalls'
 
 const HomeView = () => {
@@ -75,9 +76,7 @@ const HomeView = () => {
           /> :
           <Loading />
         }
-        {state.pageNumber < 18879 && <button onClick={() => jumpToPage(state.pageNumber += 1)}>Next page</button>}
-        <p>{state.pageNumber}</p>
-        {state.pageNumber > 1 && <button onClick={() => jumpToPage(state.pageNumber -= 1)}>Previous page</button>}
+        <Footer jumpToPage={jumpToPage}/>
       </section>
     </HomeContext.Provider>
   )

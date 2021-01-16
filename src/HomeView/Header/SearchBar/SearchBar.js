@@ -9,6 +9,7 @@ const SearchBar = ({ handleFetch }) => {
     searchPlants(userInput)
     .then(data => {
       handleFetch(data.data)
+      setUserInput('')
       console.log('fetch query results')
     })
     .catch(error => console.log(error))
@@ -16,12 +17,15 @@ const SearchBar = ({ handleFetch }) => {
 
   return (
     <form onSubmit={(event) => fetchQueryResults(event)}>
+      <label>
+        Search for plants by scientific name, common name, location, or whatever you want.
       <input 
         type='text'
         placeholder='search plants'
         onChange={(event) => setUserInput(event.target.value)}
         value={userInput}
       />
+      </label>
       <input
         type='submit'
         value='go'
