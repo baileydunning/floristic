@@ -18,10 +18,6 @@ const HomeView = () => {
   }, [localStorage])
 
   useEffect(() => {
-    saveToStorage()
-  }, [favorites])
-
-  useEffect(() => {
     (state.plantList.length === 0) && fetchPlantList()
 
     if (state.view === 'all') {
@@ -30,10 +26,6 @@ const HomeView = () => {
       setCardsOnDisplay(favorites)
     }
   }, [state.view, state.plantList, state.pageNumber, favorites])
-
-  // useEffect(() => {
-  //   saveToStorage()
-  // }, [favorites])
 
   const fetchPlantList = () => {
     setLoading(true)
@@ -103,7 +95,7 @@ const HomeView = () => {
           /> :
           <Loading />
         }
-        <Footer jumpToPage={jumpToPage} />
+        {state.view === 'all' && <Footer jumpToPage={jumpToPage} />}
       </section>
     </HomeContext.Provider>
   )
