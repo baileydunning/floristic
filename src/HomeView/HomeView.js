@@ -7,18 +7,6 @@ import Loading from '../Loading/Loading'
 import Footer from './Footer/Footer'
 import { getPlantList } from '../apiCalls'
 
-// const useStateWithLocalStorage = localStorageKey => {
-//   const [value, setValue] = React.useState(
-//     localStorage.getItem(localStorageKey) || ''
-//   );
-
-//   React.useEffect(() => {
-//     localStorage.setItem(localStorageKey, value);
-//   }, [value]);
-
-//   return [value, setValue];
-// }
-
 const HomeView = () => {
   const [state, dispatch] = useReducer(homeReducer, initialState)
   const [cardsOnDisplay, setCardsOnDisplay] = useState(state.plantList)
@@ -77,12 +65,6 @@ const HomeView = () => {
     let stringifiedFavorites = JSON.stringify(favorites)
     localStorage.setItem('favorites', stringifiedFavorites)
   }
-
-  // const retrieveFromStorage = () => {
-  //   let storedFavorites = localStorage.getItem('favorites')
-  //   return JSON.parse(storedFavorites)
-  //   // setFavorites(parsedFavorites)
-  // }
 
   const addToFavorites = (plant) => {
     setFavorites([...favorites, plant])
