@@ -7,6 +7,18 @@ import Loading from '../Loading/Loading'
 import Footer from './Footer/Footer'
 import { getPlantList } from '../apiCalls'
 
+// const useStateWithLocalStorage = localStorageKey => {
+//   const [value, setValue] = React.useState(
+//     localStorage.getItem(localStorageKey) || ''
+//   );
+
+//   React.useEffect(() => {
+//     localStorage.setItem(localStorageKey, value);
+//   }, [value]);
+
+//   return [value, setValue];
+// }
+
 const HomeView = () => {
   const [state, dispatch] = useReducer(homeReducer, initialState)
   const [cardsOnDisplay, setCardsOnDisplay] = useState(state.plantList)
@@ -14,14 +26,24 @@ const HomeView = () => {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
+    const storedFavorites = localStorage.getItem('favorites')
+    const parsedFavorites = JSON.parse(storedFavorites)
+    setFavorites(parsedFavorites)
+  }, [localStorage])
+
+  useEffect(() => {
     (state.plantList.length === 0) && fetchPlantList()
-    
+
     if (state.view === 'all') {
       setCardsOnDisplay(state.plantList)
     } else {
       setCardsOnDisplay(favorites)
     }
-  }, [state.view, state.plantList, favorites, state.pageNumber])
+  }, [state.view, state.plantList, state.pageNumber])
+
+  useEffect(() => {
+    saveToStorage()
+  }, [favorites])
 
   const fetchPlantList = () => {
     setLoading(true)
@@ -50,15 +72,28 @@ const HomeView = () => {
     dispatch(action)
   }
 
+  const saveToStorage = () => {
+    localStorage.clear()
+    let stringifiedFavorites = JSON.stringify(favorites)
+    localStorage.setItem('favorites', stringifiedFavorites)
+  }
+
+  // const retrieveFromStorage = () => {
+  //   let storedFavorites = localStorage.getItem('favorites')
+  //   return JSON.parse(storedFavorites)
+  //   // setFavorites(parsedFavorites)
+  // }
+
   const addToFavorites = (plant) => {
     setFavorites([...favorites, plant])
-
+    saveToStorage()
     console.log('added plant to favorites')
   }
 
   const removeFromFavorites = (id) => {
     const favPlants = state.favorites.filter(plant => plant.id !== id)
     setFavorites(favPlants)
+    saveToStorage()
     console.log('removed plant from favorites')
   }
 
