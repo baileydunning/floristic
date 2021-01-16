@@ -14,10 +14,12 @@ const HomeView = () => {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    const storedFavorites = localStorage.getItem('favorites')
-    const parsedFavorites = JSON.parse(storedFavorites)
-    setFavorites(parsedFavorites)
+    retrieveFromStorage()
   }, [localStorage])
+
+  useEffect(() => {
+    saveToStorage()
+  }, [favorites])
 
   useEffect(() => {
     (state.plantList.length === 0) && fetchPlantList()
@@ -27,11 +29,11 @@ const HomeView = () => {
     } else {
       setCardsOnDisplay(favorites)
     }
-  }, [state.view, state.plantList, state.pageNumber])
+  }, [state.view, state.plantList, state.pageNumber, favorites])
 
-  useEffect(() => {
-    saveToStorage()
-  }, [favorites])
+  // useEffect(() => {
+  //   saveToStorage()
+  // }, [favorites])
 
   const fetchPlantList = () => {
     setLoading(true)
@@ -43,7 +45,7 @@ const HomeView = () => {
       .catch(error => console.log(error))
     console.log('fetch')
   }
-  
+
   const handleFetch = (data) => {
     const action = { type: 'FETCH_DATA', plantList: data }
     dispatch(action)
@@ -60,6 +62,12 @@ const HomeView = () => {
     dispatch(action)
   }
 
+  const retrieveFromStorage = () => {
+    const storedFavorites = localStorage.getItem('favorites')
+    const parsedFavorites = JSON.parse(storedFavorites)
+    setFavorites(parsedFavorites)
+  }
+
   const saveToStorage = () => {
     localStorage.clear()
     let stringifiedFavorites = JSON.stringify(favorites)
@@ -73,7 +81,7 @@ const HomeView = () => {
   }
 
   const removeFromFavorites = (id) => {
-    const favPlants = state.favorites.filter(plant => plant.id !== id)
+    const favPlants = favorites.filter(plant => plant.id !== id)
     setFavorites(favPlants)
     saveToStorage()
     console.log('removed plant from favorites')
@@ -83,8 +91,8 @@ const HomeView = () => {
     <HomeContext.Provider value={state}>
       <section>
         <Header
-          handleFetch={handleFetch} 
-          toggleView={toggleView} 
+          handleFetch={handleFetch}
+          toggleView={toggleView}
         />
         {!loading ?
           <CardContainer
@@ -95,7 +103,7 @@ const HomeView = () => {
           /> :
           <Loading />
         }
-        <Footer jumpToPage={jumpToPage}/>
+        <Footer jumpToPage={jumpToPage} />
       </section>
     </HomeContext.Provider>
   )

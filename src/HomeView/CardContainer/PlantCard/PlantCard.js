@@ -7,8 +7,8 @@ import photoNotAvailable from '../../../images/picture-not-available.png'
 import './PlantCard.scss'
 
 const PlantCard = ({ plant, isFavorite, addToFavorites, removeFromFavorites }) => {
-  const [icon, setIcon] = useState(heart)
-  
+  const [icon, setIcon] = useState(isFavorite ? heartFill : heart)
+
   const handleClick = () => {
     if (!isFavorite) {
       addToFavorites(plant)
