@@ -1,0 +1,18 @@
+@import '../../../index.scss';
+
+.toggle-button {
+  height: 100%;
+  background: none;
+  outline: none;
+  border: none;
+  margin-bottom: 3%;
+}
+
+.svg {
+  width: 16%;
+  filter: invert(14%) sepia(4%) saturate(1834%) hue-rotate(194deg) brightness(96%) contrast(82%);
+  &:hover {
+    @include button-hover;
+    filter: invert(29%) sepia(8%) saturate(3564%) hue-rotate(143deg) brightness(85%) contrast(84%);
+  }
+}
