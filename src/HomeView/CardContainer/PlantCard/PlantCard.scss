@@ -1,9 +1,21 @@
+@import '../../../index.scss';
+
 .plant-card {
   background-color: transparent;
-  width: 25%;
-  height: 30vh;
-  border: 1px solid #f1f1f1;
+  width: 30%;
+  height: 50vh;
+  border: none;
+  outline: none;
   margin-top: 5%;
+  @media screen and (max-width: 1000px) {
+    width: 50%;
+  }
+  @media screen and (max-width: 800px) {
+    width: 60%;
+  }
+  @media screen and (max-width: 600px) {
+    width: 80%;
+  }
 }
 
 .plant-card-inner {
@@ -23,24 +35,63 @@
   width: 100%;
   height: 100%;
   backface-visibility: hidden;
+  margin-bottom: 5%;
+  box-shadow: 5px 5px 10px black;
 }
 
-.plant-card-front {
-  background-color: #bbb;
-  color: black;
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
+.plant-card-front img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .plant-card-back {
-  background-color: lightgray;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  background-color: white;
   color: black;
   transform: rotateY(180deg);
+  padding-bottom: 2%;
+  @media screen and (max-width: 800px) {
+    justify-content: center;
+    padding-bottom: 4%;
+  }
+}
+
+.plant-card-btns {
+  margin-top: 3%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.fav-btn, .learn-link {
+  width: 50%;
+  margin: 4%;
+  border: none;
+  background-color: transparent;
+  outline: none;
+  &:hover {
+    @include button-hover;
+  }
+}
+
+.learn-link a {
+  color: $teal;
+  font-size: 1.7em;
+  &:hover {
+    transition-duration: 1s;
+    color: $charcoal;
+  }
 }
 
 .heart-icon {
-  width: 20%;
+  width: 35%;
+  filter: invert(17%) sepia(16%) saturate(309%) hue-rotate(194deg) brightness(98%) contrast(90%);
+  &:hover {
+    transition-duration: 1s;
+    filter: invert(29%) sepia(8%) saturate(3564%) hue-rotate(143deg) brightness(85%) contrast(84%);
+  }
 }

@@ -10,17 +10,26 @@ import { getPlantList } from '../apiCalls'
 const HomeView = () => {
   const [state, dispatch] = useReducer(homeReducer, initialState)
   const [cardsOnDisplay, setCardsOnDisplay] = useState(state.plantList)
+  const [favorites, setFavorites] = useState([])
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
+    retrieveFromStorage()
+  }, [localStorage])
+
+  useEffect(() => {
+    saveToStorage()
+  }, [favorites])
+
+  useEffect(() => {
     (state.plantList.length === 0) && fetchPlantList()
-    
+
     if (state.view === 'all') {
       setCardsOnDisplay(state.plantList)
     } else {
-      setCardsOnDisplay(state.favorites)
+      setCardsOnDisplay(favorites)
     }
-  }, [state.view, state.plantList, state.favorites, state.pageNumber])
+  }, [state.view, state.plantList, state.pageNumber, favorites])
 
   const fetchPlantList = () => {
     setLoading(true)
@@ -32,7 +41,7 @@ const HomeView = () => {
       .catch(error => console.log(error))
     console.log('fetch')
   }
-  
+
   const handleFetch = (data) => {
     const action = { type: 'FETCH_DATA', plantList: data }
     dispatch(action)
@@ -49,15 +58,30 @@ const HomeView = () => {
     dispatch(action)
   }
 
+  const retrieveFromStorage = () => {
+    const storedFavorites = localStorage.getItem('favorites')
+    const parsedFavorites = JSON.parse(storedFavorites)
+    setFavorites(parsedFavorites)
+    saveToStorage()
+  }
+
+  const saveToStorage = () => {
+    localStorage.clear()
+    let stringifiedFavorites = JSON.stringify(favorites)
+    localStorage.setItem(`favorites`, stringifiedFavorites)
+  }
+
   const addToFavorites = (plant) => {
-    const action = { type: 'ADD_TO_FAVORITES', plant: plant }
-    dispatch(action)
+    setFavorites([...favorites, plant])
+    saveToStorage()
     console.log('added plant to favorites')
+    console.log(localStorage.favorites)
   }
 
   const removeFromFavorites = (id) => {
-    const action = { type: 'REMOVE_FROM_FAVORITES', id: id }
-    dispatch(action)
+    const favPlants = favorites.filter(plant => plant.id !== id)
+    setFavorites(favPlants)
+    saveToStorage()
     console.log('removed plant from favorites')
   }
 
@@ -65,18 +89,19 @@ const HomeView = () => {
     <HomeContext.Provider value={state}>
       <section>
         <Header
-          handleFetch={handleFetch} 
-          toggleView={toggleView} 
+          handleFetch={handleFetch}
+          toggleView={toggleView}
         />
         {!loading ?
           <CardContainer
+            favorites={favorites}
             cardsOnDisplay={cardsOnDisplay}
             addToFavorites={addToFavorites}
             removeFromFavorites={removeFromFavorites}
           /> :
           <Loading />
         }
-        <Footer jumpToPage={jumpToPage}/>
+        {state.view === 'all' && <Footer jumpToPage={jumpToPage} />}
       </section>
     </HomeContext.Provider>
   )
