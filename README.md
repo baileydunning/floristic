@@ -1,3 +1,5 @@
+![gif](https://media.giphy.com/media/LfhwOvm2YGVBRxyqvZ/giphy.gif)
+
 ## How To Access This Application
 
 *On your terminal*:
