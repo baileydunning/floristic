@@ -23,26 +23,28 @@ const PlantCard = ({ plant, isFavorite, addToFavorites, removeFromFavorites }) =
     <div className='plant-card'>
       <div className='plant-card-inner'>
         <div className='plant-card-front'>
-          {plant['image_url'] ? 
-            <img src={ plant['image_url'] } alt='plant-img'/> :
-            <img src={ photoNotAvailable } alt='plant-img' />
+          {plant['image_url'] ?
+            <img src={plant['image_url']} alt='plant-img' /> :
+            <img src={photoNotAvailable} alt='plant-img' />
           }
         </div>
         <div className='plant-card-back'>
-          <h2>{ plant['scientific_name'] }</h2>
-          <h3>{ plant['common_name'] }</h3>
-          <div>
-            <button onClick={handleClick}>
-              <img 
+          <h2>{plant['scientific_name']}</h2>
+          <h3>{plant['common_name']}</h3>
+          <div className='plant-card-btns'>
+            <button
+              className='fav-btn' 
+              onClick={handleClick}>
+              <img
                 src={icon}
                 alt='fav-icon'
-                className='heart-icon' 
+                className='heart-icon'
               />
             </button>
+            <button className='learn-link'>
+              <Link to={`/${plant['id']}`}>Learn More</Link>
+            </button>
           </div>
-          <button>
-            <Link to={`/${plant['id']}`}>Learn More</Link>
-          </button>
         </div>
       </div>
     </div>

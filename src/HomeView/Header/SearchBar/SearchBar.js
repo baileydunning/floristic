@@ -1,9 +1,11 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { searchPlants } from '../../../apiCalls'
+import HomeContext from '../../HomeContext'
 import './SearchBar.scss'
 
 const SearchBar = ({ handleFetch }) => {
   const [userInput, setUserInput] = useState('')
+  const context = useContext(HomeContext)
 
   const fetchQueryResults = (event) => {
     event.preventDefault()

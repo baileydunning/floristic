@@ -1,9 +1,19 @@
+@import '../../../index.scss';
+
 .plant-card {
   background-color: transparent;
   width: 25%;
-  height: 30vh;
+  height: 50vh;
   border: 1px solid #f1f1f1;
   margin-top: 5%;
+  @media screen and (max-width: 800px) {
+    width: 50%;
+    height: 40vh;
+  }
+  @media screen and (max-width: 600px) {
+    width: 60%;
+    height: 40vh;
+  }
 }
 
 .plant-card-inner {
@@ -23,6 +33,7 @@
   width: 100%;
   height: 100%;
   backface-visibility: hidden;
+  margin-bottom: 5%;
 }
 
 .plant-card-front {
@@ -36,11 +47,44 @@
 }
 
 .plant-card-back {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
   background-color: lightgray;
   color: black;
   transform: rotateY(180deg);
+  padding-bottom: 2%;
+  @media screen and (max-width: 800px) {
+    justify-content: center;
+    padding-bottom: 4%;
+  }
+}
+
+.plant-card-btns {
+  margin-top: 3%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.fav-btn, .learn-link {
+  width: 50%;
+  margin: 4%;
+  border: none;
+  background-color: transparent;
+  outline: none;
+  &:hover {
+    @include button-hover;
+  }
+}
+
+.learn-link a {
+  color: darkblue;
+  font-size: 1.7em;
 }
 
 .heart-icon {
-  width: 20%;
+  width: 30%;
+  filter: invert(11%) sepia(68%) saturate(7500%) hue-rotate(242deg) brightness(60%) contrast(132%);
 }
