@@ -24,8 +24,8 @@ const PlantCard = ({ plant, isFavorite, addToFavorites, removeFromFavorites }) =
       <div className='plant-card-inner'>
         <div className='plant-card-front'>
           {plant['image_url'] ?
-            <img src={plant['image_url']} alt='plant-img' /> :
-            <img src={photoNotAvailable} alt='plant-img' />
+            <img src={plant['image_url']} alt='image' /> :
+            <img src={photoNotAvailable} alt='image' />
           }
         </div>
         <div className='plant-card-back'>
