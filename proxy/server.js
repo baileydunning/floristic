@@ -1,6 +1,6 @@
-const { request } = require('express')
 const express = require('express')
 const cors = require('cors')
+const fetch = require('node-fetch')
 const app = express()
 app.use(express.json())
 app.use(cors())
@@ -44,9 +44,15 @@ app.locals.title = 'floristic'
 
 app.get('/plants/:page', (request, response) => {
   const { page } = request.params
-  const plants = app.locals.data
-  response.json(plants)
+  const url = `https://trefle.io/api/v1/plants?page=${page}&token=w76udTztX_89MySv3fO4fG41HD2yq9xhIRETq1KCXCg`
+  // const plants = app.locals.data
+  // response.json(plants)
+  fetch(url)
+  .then(res => res.json())
 })
+
+
+
 
 app.listen(app.get('port'), () => {
   console.log(`${app.locals.title} is running on http://localhost:${app.get('port')}.`);
