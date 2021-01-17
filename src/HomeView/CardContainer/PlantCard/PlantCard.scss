@@ -81,6 +81,10 @@
 .learn-link a {
   color: $teal;
   font-size: 1.7em;
+  &:hover {
+    transition-duration: 1s;
+    color: $charcoal;
+  }
 }
 
 .heart-icon {

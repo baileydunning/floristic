@@ -62,7 +62,7 @@ const HomeView = () => {
     const storedFavorites = localStorage.getItem('favorites')
     const parsedFavorites = JSON.parse(storedFavorites)
     setFavorites(parsedFavorites)
-    // saveToStorage()
+    saveToStorage()
   }
 
   const saveToStorage = () => {
