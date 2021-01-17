@@ -25,8 +25,8 @@ const App = () => {
         <Route
           exact
           path='/:id'
-          render={() => 
-            <FeatureView id={routeId} />
+          render={({ match }) => 
+            <FeatureView id={match.params.id} />
           }
         />
       </Switch>
