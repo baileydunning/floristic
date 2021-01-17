@@ -18,6 +18,10 @@ const HomeView = () => {
   }, [localStorage])
 
   useEffect(() => {
+    saveToStorage()
+  }, [favorites])
+
+  useEffect(() => {
     (state.plantList.length === 0) && fetchPlantList()
 
     if (state.view === 'all') {
@@ -58,18 +62,20 @@ const HomeView = () => {
     const storedFavorites = localStorage.getItem('favorites')
     const parsedFavorites = JSON.parse(storedFavorites)
     setFavorites(parsedFavorites)
+    // saveToStorage()
   }
 
   const saveToStorage = () => {
     localStorage.clear()
     let stringifiedFavorites = JSON.stringify(favorites)
-    localStorage.setItem('favorites', stringifiedFavorites)
+    localStorage.setItem(`favorites`, stringifiedFavorites)
   }
 
   const addToFavorites = (plant) => {
     setFavorites([...favorites, plant])
     saveToStorage()
     console.log('added plant to favorites')
+    console.log(localStorage.favorites)
   }
 
   const removeFromFavorites = (id) => {

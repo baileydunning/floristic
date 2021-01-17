@@ -2,18 +2,26 @@
 
 .footer {
   @include row-wrap;
-  justify-content: center;
   height: 20vh;
-  background-color: gray;
+  justify-content: center;
   align-items: center;
+  background-color: $charcoal;
+  box-shadow: 0px 0px 0px black, 0px -7px 15px white;
   p {
     font-size: 2em;
     padding: 0 5%;
+    color: white;
   }
   button {
     border: none;
+    border-radius: 50%;
     font-size: xx-large;
-    background-color: lightblue;
-    height: 50%;
+    background-color: white;
+    color: $teal;
+    box-shadow: 5px 5px 10px black;
+    outline: none;
+      &:hover {
+        @include button-hover;
+      }
   }
 }

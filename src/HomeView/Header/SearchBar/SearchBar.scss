@@ -14,7 +14,7 @@ label {
 }
 
 .submit {
-  background-color: darkblue;
+  background-color: $teal;
   font-family: $primaryFont;
   color: white;
   border: none;
@@ -22,13 +22,16 @@ label {
   height: 40%;
   width: 10%;
   border-radius: 10%;
+  box-shadow: 5px 5px 10px black;
   &:hover {
     @include button-hover;
   }
 }
 
 .search-input {
+  outline: none;
   width: 50%;
   margin: 2%;
   height: 33%;
+  box-shadow: 5px 5px 25px black;
 }

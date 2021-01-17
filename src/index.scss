@@ -3,8 +3,15 @@
 $primaryFont: 'Nixie One', cursive;
 $paragraphFont: 'Montserrat Alternates', sans-serif;
 
+$teal: #22545e;
+$charcoal: #323339;
+$grayish-blue: #284466;
+$forest-green: #2c563c;
+$lt-gray: #dedede;
+
 body {
   margin: 0;
+  background-color: $lt-gray;
 }
 
 h1 {
