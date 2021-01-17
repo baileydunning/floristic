@@ -8,14 +8,17 @@ import './PlantCard.scss'
 
 const PlantCard = ({ plant, isFavorite, addToFavorites, removeFromFavorites }) => {
   const [icon, setIcon] = useState(isFavorite ? heartFill : heart)
-
+  const [altText, setAltText] = useState(isFavorite ? 'favorite' : 'notFavorite')
+  
   const handleClick = () => {
     if (!isFavorite) {
       addToFavorites(plant)
       setIcon(heartFill)
+      setAltText('favorite')
     } else {
       removeFromFavorites(plant.id)
       setIcon(heart)
+      setAltText('notFavorite')
     }
   }
 
@@ -37,7 +40,7 @@ const PlantCard = ({ plant, isFavorite, addToFavorites, removeFromFavorites }) =
               onClick={handleClick}>
               <img
                 src={icon}
-                alt='fav-icon'
+                alt={altText}
                 className='heart-icon'
               />
             </button>
