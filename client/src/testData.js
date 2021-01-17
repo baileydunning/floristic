@@ -136,6 +136,34 @@ export const sampleFavorites = [
   }
 ]
 
+export const sampleCard = {
+  "id": 678281,
+  "common_name": "Evergreen oak",
+  "slug": "quercus-rotundifolia",
+  "scientific_name": "Quercus rotundifolia",
+  "year": 1785,
+  "bibliography": "Encycl. 1: 723 (1785)",
+  "author": "Lam.",
+  "status": "accepted",
+  "rank": "species",
+  "family_common_name": "Beech family",
+  "genus_id": 5778,
+  "image_url": "https://bs.floristic.org/image/o/1a03948baf0300da25558c2448f086d39b41ca30",
+  "synonyms": [
+    "Quercus lyauteyi",
+    "Quercus rotundifolia f. crassicupulata",
+    "Quercus ballota",
+    "Quercus rotundifolia var. macrocarpa"
+  ],
+  "genus": "Quercus",
+  "family": "Fagaceae",
+  "links": {
+    "self": "/api/v1/species/quercus-rotundifolia",
+    "plant": "/api/v1/plants/quercus-rotundifolia",
+    "genus": "/api/v1/genus/quercus"
+  }
+}
+
 export const samplePlantData = [
   {
     "id": 117699,

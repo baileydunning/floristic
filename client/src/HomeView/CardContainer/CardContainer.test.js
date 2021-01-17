@@ -42,5 +42,4 @@ describe('CardContainer', () => {
     expect(favorites.length).toBe(1)
     expect(otherPlants.length).toBe(3)
   })
-
 })

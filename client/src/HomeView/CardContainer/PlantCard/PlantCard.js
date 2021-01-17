@@ -1,6 +1,5 @@
-import { useState, useContext } from 'react'
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import HomeContext from '../../HomeContext'
 import heart from '../../../images/heart.svg'
 import heartFill from '../../../images/heart-fill.svg'
 import photoNotAvailable from '../../../images/picture-not-available.png'
@@ -36,7 +35,8 @@ const PlantCard = ({ plant, isFavorite, addToFavorites, removeFromFavorites }) =
           <h3>{plant['common_name']}</h3>
           <div className='plant-card-btns'>
             <button
-              className='fav-btn' 
+              className='fav-btn'
+              data-testid='fav-toggle' 
               onClick={handleClick}>
               <img
                 src={icon}
