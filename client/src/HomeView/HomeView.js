@@ -5,14 +5,16 @@ import Header from './Header/Header'
 import CardContainer from './CardContainer/CardContainer'
 import Loading from '../Loading/Loading'
 import Footer from './Footer/Footer'
-import { getPlantList } from '../apiCalls'
+import { getPlantList, searchPlants } from '../apiCalls'
 
-const HomeView = () => {
+const HomeView = ({ query }) => {
   const [state, dispatch] = useReducer(homeReducer, initialState)
   const [cardsOnDisplay, setCardsOnDisplay] = useState(state.plantList)
   const [favorites, setFavorites] = useState([])
+  const [search, setSearch] = useState(query)
   const [loading, setLoading] = useState(true)
-
+  const [error, setError] = useState(null)
+  
   useEffect(() => {
     retrieveFromStorage()
   }, [localStorage])
@@ -33,13 +35,23 @@ const HomeView = () => {
 
   const fetchPlantList = () => {
     setLoading(true)
-    getPlantList(state.pageNumber)
-      .then(data => {
-        handleFetch(data.data)
-        handleLinks(data.links)
-        setLoading(false)
-      })
-      .catch(error => console.log(error))
+    if (!search) {
+      getPlantList(state.pageNumber)
+        .then(data => {
+          handleFetch(data.data)
+          handleLinks(data.links)
+          setLoading(false)
+        })
+        .catch(err => setError(err))
+    } else {
+      searchPlants(search)
+        .then(data => {
+          handleFetch(data.data)
+          handleLinks(data.links)
+          setLoading(false)
+        })
+        .catch(err => setError(err))
+    }
   }
 
   const handleFetch = (data) => {
@@ -87,6 +99,11 @@ const HomeView = () => {
     saveToStorage()
   }
 
+  const updateSearch = (queryRequest) => {
+    setSearch(queryRequest)
+    fetchPlantList()
+  }
+
   const determineMaxPage = () => {
     if (state.links.last) {
       return state.links.last.split('=')[1]
@@ -102,6 +119,7 @@ const HomeView = () => {
           handleFetch={handleFetch}
           handleLinks={handleLinks}
           toggleView={toggleView}
+          updateSearch={updateSearch}
         />
         {!loading ?
           <CardContainer

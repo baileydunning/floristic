@@ -1,25 +1,20 @@
-import { useContext, useState } from 'react'
-import { searchPlants } from '../../../apiCalls'
+import { useState } from 'react'
+import { Redirect } from 'react-router'
+import { Link } from 'react-router-dom'
 import './SearchBar.scss'
 
-const SearchBar = ({ handleFetch, handleLinks }) => {
+const SearchBar = ({ updateSearch }) => {
   const [userInput, setUserInput] = useState('')
-
-  const fetchQueryResults = (event) => {
+  
+  const submitSearch = (event) => {
     event.preventDefault()
-    searchPlants(userInput)
-      .then(data => {
-        handleFetch(data.data)
-        handleLinks(data.links)
-        setUserInput('')
-      })
-      .catch(error => console.log(error))
+    updateSearch(userInput)
+    setUserInput('')
   }
 
   return (
-    <form
-      className='search-form'
-      onSubmit={(event) => fetchQueryResults(event)}>
+    <form className='search-form'>
+  
       <label>search for plants by name, location, or whatever you want.
         <input
           type='text'
@@ -28,11 +23,9 @@ const SearchBar = ({ handleFetch, handleLinks }) => {
           onChange={(event) => setUserInput(event.target.value)}
           value={userInput}
         />
-        <input
-          className='submit'
-          type='submit'
-          value='GO'
-        />
+        {userInput &&
+          <Link to={`/search/${userInput}`}>GO</Link>
+        }
       </label>
     </form>
   )

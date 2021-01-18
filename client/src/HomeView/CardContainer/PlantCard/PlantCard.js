@@ -45,7 +45,7 @@ const PlantCard = ({ plant, isFavorite, addToFavorites, removeFromFavorites }) =
               />
             </button>
             <button className='learn-link'>
-              <Link to={`/${plant['id']}`}>Learn More</Link>
+              <Link to={`/plant/${plant['id']}`}>Learn More</Link>
             </button>
           </div>
         </div>
