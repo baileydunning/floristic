@@ -116,8 +116,6 @@ const HomeView = ({ query }) => {
     <HomeContext.Provider value={state}>
       <section>
         <Header
-          handleFetch={handleFetch}
-          handleLinks={handleLinks}
           toggleView={toggleView}
           updateSearch={updateSearch}
         />
