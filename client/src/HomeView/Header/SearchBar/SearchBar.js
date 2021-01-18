@@ -2,7 +2,7 @@ import { useContext, useState } from 'react'
 import { searchPlants } from '../../../apiCalls'
 import './SearchBar.scss'
 
-const SearchBar = ({ handleFetch }) => {
+const SearchBar = ({ handleFetch, handleLinks }) => {
   const [userInput, setUserInput] = useState('')
 
   const fetchQueryResults = (event) => {
@@ -10,6 +10,7 @@ const SearchBar = ({ handleFetch }) => {
     searchPlants(userInput)
       .then(data => {
         handleFetch(data.data)
+        handleLinks(data.links)
         setUserInput('')
       })
       .catch(error => console.log(error))

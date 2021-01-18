@@ -36,6 +36,7 @@ const HomeView = () => {
     getPlantList(state.pageNumber)
       .then(data => {
         handleFetch(data.data)
+        handleLinks(data.links)
         setLoading(false)
       })
       .catch(error => console.log(error))
@@ -44,6 +45,11 @@ const HomeView = () => {
 
   const handleFetch = (data) => {
     const action = { type: 'FETCH_DATA', plantList: data }
+    dispatch(action)
+  }
+
+  const handleLinks = (links) => {
+    const action = { type: 'FETCH_LINKS', links: links }
     dispatch(action)
   }
 
@@ -85,11 +91,20 @@ const HomeView = () => {
     console.log('removed plant from favorites')
   }
 
+  const determineMaxPage = () => {
+    if (state.links.last) {
+      return state.links.last.split('=')[1]
+    } else {
+      return '1'
+    }
+  }
+
   return (
     <HomeContext.Provider value={state}>
       <section>
         <Header
           handleFetch={handleFetch}
+          handleLinks={handleLinks}
           toggleView={toggleView}
         />
         {!loading ?
@@ -101,7 +116,12 @@ const HomeView = () => {
           /> :
           <Loading />
         }
-        {state.view === 'all' && <Footer jumpToPage={jumpToPage} />}
+        {state.view === 'all' && 
+          <Footer
+            determineMaxPage={determineMaxPage} 
+            jumpToPage={jumpToPage} 
+          />
+        }
       </section>
     </HomeContext.Provider>
   )
