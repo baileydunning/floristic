@@ -80,15 +80,12 @@ const HomeView = () => {
   const addToFavorites = (plant) => {
     setFavorites([...favorites, plant])
     saveToStorage()
-    console.log('added plant to favorites')
-    console.log(localStorage.favorites)
   }
 
   const removeFromFavorites = (id) => {
     const favPlants = favorites.filter(plant => plant.id !== id)
     setFavorites(favPlants)
     saveToStorage()
-    console.log('removed plant from favorites')
   }
 
   const determineMaxPage = () => {

@@ -21,7 +21,7 @@ const SearchBar = ({ handleFetch, handleLinks }) => {
       className='search-form'
       onSubmit={(event) => fetchQueryResults(event)}>
       <label>search for plants by name, location, or whatever you want.
-      <input
+        <input
           type='text'
           className='search-input'
           placeholder='search...'

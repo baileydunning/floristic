@@ -1,29 +1,23 @@
-import { useEffect, useReducer } from 'react'
+import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { featureReducer, initialState } from './FeatureReducer'
 import Loading from '../Loading/Loading'
 import { getPlant } from '../apiCalls'
 import './FeatureView.scss'
 
 const FeatureView = ({ id }) => {
-  const [state, dispatch] = useReducer(featureReducer, initialState)
+  const [plantData, setPlantData] = useState(null)
 
   useEffect(() => {
-    if (!state.plantData) {
+    if (!plantData) {
       getPlant(id)
-        .then(data => handleFetch(data.data))
+        .then(data => setPlantData(data.data))
         .catch(error => console.log(error))
     }
-  }, [id, state.plantData])
-
-  const handleFetch = (data) => {
-    const action = { type: 'FETCH_DATA', plantData: data }
-    dispatch(action)
-  }
+  }, [id, plantData])
 
   const listLocations = (type) => {
-    if (state.plantData['main_species'].distributions[type]) {
-      return state.plantData['main_species'].distributions[type].map(place => {
+    if (plantData['main_species'].distributions[type]) {
+      return plantData['main_species'].distributions[type].map(place => {
         return <li key={place.id}>{place.name}</li>
       })
     } else {
@@ -32,14 +26,14 @@ const FeatureView = ({ id }) => {
   }
 
   return (
-    <section>
-      {state.plantData ?
+    <section className='feature' data-testid='feature-view'>
+      {plantData ?
         <section>
-          <h2>{state.plantData['scientific_name']}:</h2>
-          <h2>{state.plantData['common_name']} from the {state.plantData['family_common_name']}</h2>
-          <h3>Genus: {state.plantData.genus.name}</h3>
-          <h3>Family: {state.plantData.family.name}</h3>
-          <p><b>Observations: </b>{state.plantData.observations}</p>
+          <h1>{plantData['scientific_name']}:</h1>
+          <h2>{plantData['common_name']} from the {plantData['family_common_name']}</h2>
+          <h3>Genus: {plantData.genus.name}</h3>
+          <h3>Family: {plantData.family.name}</h3>
+          <p><b>Observations: </b>{plantData.observations}</p>
           <div className='distributions'>
             <div className='native'>
               <p><b>Native: </b></p>
@@ -55,10 +49,10 @@ const FeatureView = ({ id }) => {
             </div>
           </div>
           <div>
-            {state.plantData['main_species'].edible ? <p>✓ Edible</p> : <p>✘ Inedible</p>}
-            {state.plantData['main_species'].vegetable ? <p>✓ Vegetable</p> : <p>✘ Not a Vegetable</p>}
+            {plantData['main_species'].edible ? <p>✓ Edible</p> : <p>✘ Inedible</p>}
+            {plantData['main_species'].vegetable ? <p>✓ Vegetable</p> : <p>✘ Not a Vegetable</p>}
           </div>
-          <img src={state.plantData['image_url']} />
+          <img src={plantData['image_url']} />
         </section> :
         <Loading />
       }

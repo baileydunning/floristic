@@ -65,7 +65,6 @@ describe('Footer', () => {
       )
     })
 
-
     it('should not show next button on last page', () => {
       const navigatePageBtns = screen.getAllByRole('button')
       expect(navigatePageBtns.length).toBe(1)
