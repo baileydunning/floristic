@@ -19,9 +19,17 @@ const Footer = ({ determineMaxPage, jumpToPage }) => {
 
   return (
     <footer className='footer' data-testid='footer'>
-      { context.pageNumber > 1 && <button onClick={() => jumpToPage(context.pageNumber -= 1)}>←</button>}
-      <p>{context.pageNumber}</p>
-      { context.pageNumber < maxPage && <button onClick={() => jumpToPage(context.pageNumber += 1)}>→</button>}
+      { context.pageNumber > 1 && 
+        <button 
+          onClick={() => jumpToPage(context.pageNumber -= 1)}>
+          ←
+        </button>}
+      <p>{ context.pageNumber }</p>
+      { context.pageNumber < maxPage && 
+        <button 
+          onClick={() => jumpToPage(context.pageNumber += 1)}>
+          →
+        </button>}
     </footer>
   )
 }
