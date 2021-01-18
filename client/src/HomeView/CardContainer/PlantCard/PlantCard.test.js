@@ -1,8 +1,8 @@
 import PlantCard from './PlantCard'
 import { screen, render } from '@testing-library/react'
-import { sampleCard } from '../../../testData'
 import { Router } from 'react-router-dom'
 import { createMemoryHistory } from 'history'
+import { sampleCard } from '../../../testData'
 import userEvent from '@testing-library/user-event'
 import '@testing-library/jest-dom'
 
@@ -30,6 +30,7 @@ describe('PlantCard', () => {
         />
       </Router>
     )
+
     card = screen.getByText('Evergreen oak')
     favToggleBtn = screen.getByTestId('fav-toggle')
     expect(card).toBeInTheDocument()
@@ -47,6 +48,7 @@ describe('PlantCard', () => {
         />
       </Router>
     )
+
     card = screen.getByText('Evergreen oak')
     favToggleBtn = screen.getByTestId('fav-toggle')
     const notFavorited = screen.getByAltText('notFavorite')
@@ -72,6 +74,7 @@ describe('PlantCard', () => {
         />
       </Router>
     )
+
     card = screen.getByText('Evergreen oak')
     favToggleBtn = screen.getByTestId('fav-toggle')
     userEvent.click(favToggleBtn)

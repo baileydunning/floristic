@@ -4,13 +4,11 @@ import '@testing-library/jest-dom'
 
 describe('Loading', () => {
   beforeEach(() => {
-    render(
-      <Loading />
-    )
+    render(<Loading />)
   })
 
   it('should render the loading section', () => {
-    const loading = screen.getByTestId('loading')
-    expect(loading).toBeInTheDocument()
+    const loadingSection = screen.getByTestId('loading')
+    expect(loadingSection).toBeInTheDocument()
   })  
 })
