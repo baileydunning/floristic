@@ -4,7 +4,7 @@ import './Header.scss'
 
 const Header = ({ handleFetch, handleLinks, toggleView }) => {
   return (
-    <header className='header'>
+    <header className='header' data-testid='header'>
       <h1 className='title'>floristic</h1>
       <SearchBar 
         handleFetch={handleFetch} 
