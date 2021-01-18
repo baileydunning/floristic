@@ -6,12 +6,13 @@ import './FeatureView.scss'
 
 const FeatureView = ({ id }) => {
   const [plantData, setPlantData] = useState(null)
+  const [error, setError] = useState(null)
 
   useEffect(() => {
     if (!plantData) {
       getPlant(id)
         .then(data => setPlantData(data.data))
-        .catch(error => console.log(error))
+        .catch(err => setError(err))
     }
   }, [id, plantData])
 

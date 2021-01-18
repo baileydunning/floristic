@@ -164,8 +164,8 @@ export const sampleCard = {
   }
 }
 
-export const samplePlantData = [
-  {
+export const samplePlantData = {
+  data: {
     "id": 117699,
     "common_name": "gray dogwood",
     "slug": "cornus-racemosa",
@@ -256,91 +256,13 @@ export const samplePlantData = [
       },
       "distribution": {
         "native": [
-          "Connecticut",
-          "District of Columbia",
-          "Illinois",
-          "Indiana",
-          "Iowa",
-          "Kentucky",
           "Maine",
           "Manitoba",
-          "Maryland",
-          "Masachusettes",
-          "Michigan",
-          "Minnesota",
-          "Missouri",
-          "Nebraska",
-          "New Hampshire",
-          "New Jersey",
-          "New York",
-          "North Carolina",
-          "Ohio",
-          "Ontario",
-          "Pennsylvania",
-          "Québec",
-          "Rhode I.",
-          "South Dakota",
-          "Texas",
-          "Vermont",
-          "Virginia",
-          "West Virginia",
           "Wisconsin"
         ]
       },
       "distributions": {
         "native": [
-          {
-            "id": 252,
-            "name": "Connecticut",
-            "slug": "cnt",
-            "tdwg_code": "CNT",
-            "tdwg_level": 3,
-            "species_count": 2163,
-            "links": {
-              "self": "/api/v1/distributions/cnt",
-              "plants": "/api/v1/distributions/cnt/plants",
-              "species": "/api/v1/distributions/cnt/species"
-            }
-          },
-          {
-            "id": 229,
-            "name": "District of Columbia",
-            "slug": "wdc",
-            "tdwg_code": "WDC",
-            "tdwg_level": 3,
-            "species_count": 1236,
-            "links": {
-              "self": "/api/v1/distributions/wdc",
-              "plants": "/api/v1/distributions/wdc/plants",
-              "species": "/api/v1/distributions/wdc/species"
-            }
-          },
-          {
-            "id": 145,
-            "name": "Illinois",
-            "slug": "ill",
-            "tdwg_code": "ILL",
-            "tdwg_level": 3,
-            "species_count": 3289,
-            "links": {
-              "self": "/api/v1/distributions/ill",
-              "plants": "/api/v1/distributions/ill/plants",
-              "species": "/api/v1/distributions/ill/species"
-            }
-          },
-          {
-            "id": 230,
-            "name": "Indiana",
-            "slug": "ini",
-            "tdwg_code": "INI",
-            "tdwg_level": 3,
-            "species_count": 2250,
-            "links": {
-              "self": "/api/v1/distributions/ini",
-              "plants": "/api/v1/distributions/ini/plants",
-              "species": "/api/v1/distributions/ini/species"
-            }
-          },
           {
             "id": 231,
             "name": "Iowa",
@@ -381,97 +303,6 @@ export const samplePlantData = [
             }
           },
           {
-            "id": 259,
-            "name": "Manitoba",
-            "slug": "man",
-            "tdwg_code": "MAN",
-            "tdwg_level": 3,
-            "species_count": 1474,
-            "links": {
-              "self": "/api/v1/distributions/man",
-              "plants": "/api/v1/distributions/man/plants",
-              "species": "/api/v1/distributions/man/species"
-            }
-          },
-          {
-            "id": 233,
-            "name": "Maryland",
-            "slug": "mry",
-            "tdwg_code": "MRY",
-            "tdwg_level": 3,
-            "species_count": 2378,
-            "links": {
-              "self": "/api/v1/distributions/mry",
-              "plants": "/api/v1/distributions/mry/plants",
-              "species": "/api/v1/distributions/mry/species"
-            }
-          },
-          {
-            "id": 254,
-            "name": "Masachusettes",
-            "slug": "mas",
-            "tdwg_code": "MAS",
-            "tdwg_level": 3,
-            "species_count": 2448,
-            "links": {
-              "self": "/api/v1/distributions/mas",
-              "plants": "/api/v1/distributions/mas/plants",
-              "species": "/api/v1/distributions/mas/species"
-            }
-          },
-          {
-            "id": 234,
-            "name": "Michigan",
-            "slug": "mic",
-            "tdwg_code": "MIC",
-            "tdwg_level": 3,
-            "species_count": 2388,
-            "links": {
-              "self": "/api/v1/distributions/mic",
-              "plants": "/api/v1/distributions/mic/plants",
-              "species": "/api/v1/distributions/mic/species"
-            }
-          },
-          {
-            "id": 257,
-            "name": "Minnesota",
-            "slug": "min",
-            "tdwg_code": "MIN",
-            "tdwg_level": 3,
-            "species_count": 1952,
-            "links": {
-              "self": "/api/v1/distributions/min",
-              "plants": "/api/v1/distributions/min/plants",
-              "species": "/api/v1/distributions/min/species"
-            }
-          },
-          {
-            "id": 235,
-            "name": "Missouri",
-            "slug": "mso",
-            "tdwg_code": "MSO",
-            "tdwg_level": 3,
-            "species_count": 2448,
-            "links": {
-              "self": "/api/v1/distributions/mso",
-              "plants": "/api/v1/distributions/mso/plants",
-              "species": "/api/v1/distributions/mso/species"
-            }
-          },
-          {
-            "id": 262,
-            "name": "Nebraska",
-            "slug": "neb",
-            "tdwg_code": "NEB",
-            "tdwg_level": 3,
-            "species_count": 1651,
-            "links": {
-              "self": "/api/v1/distributions/neb",
-              "plants": "/api/v1/distributions/neb/plants",
-              "species": "/api/v1/distributions/neb/species"
-            }
-          },
-          {
             "id": 255,
             "name": "New Hampshire",
             "slug": "nwh",
@@ -482,19 +313,6 @@ export const samplePlantData = [
               "self": "/api/v1/distributions/nwh",
               "plants": "/api/v1/distributions/nwh/plants",
               "species": "/api/v1/distributions/nwh/species"
-            }
-          },
-          {
-            "id": 236,
-            "name": "New Jersey",
-            "slug": "nwj",
-            "tdwg_code": "NWJ",
-            "tdwg_level": 3,
-            "species_count": 2377,
-            "links": {
-              "self": "/api/v1/distributions/nwj",
-              "plants": "/api/v1/distributions/nwj/plants",
-              "species": "/api/v1/distributions/nwj/species"
             }
           },
           {
@@ -534,136 +352,6 @@ export const samplePlantData = [
               "self": "/api/v1/distributions/ohi",
               "plants": "/api/v1/distributions/ohi/plants",
               "species": "/api/v1/distributions/ohi/species"
-            }
-          },
-          {
-            "id": 240,
-            "name": "Ontario",
-            "slug": "ont",
-            "tdwg_code": "ONT",
-            "tdwg_level": 3,
-            "species_count": 2661,
-            "links": {
-              "self": "/api/v1/distributions/ont",
-              "plants": "/api/v1/distributions/ont/plants",
-              "species": "/api/v1/distributions/ont/species"
-            }
-          },
-          {
-            "id": 241,
-            "name": "Pennsylvania",
-            "slug": "pen",
-            "tdwg_code": "PEN",
-            "tdwg_level": 3,
-            "species_count": 2729,
-            "links": {
-              "self": "/api/v1/distributions/pen",
-              "plants": "/api/v1/distributions/pen/plants",
-              "species": "/api/v1/distributions/pen/species"
-            }
-          },
-          {
-            "id": 242,
-            "name": "Québec",
-            "slug": "que",
-            "tdwg_code": "QUE",
-            "tdwg_level": 3,
-            "species_count": 2300,
-            "links": {
-              "self": "/api/v1/distributions/que",
-              "plants": "/api/v1/distributions/que/plants",
-              "species": "/api/v1/distributions/que/species"
-            }
-          },
-          {
-            "id": 256,
-            "name": "Rhode I.",
-            "slug": "rho",
-            "tdwg_code": "RHO",
-            "tdwg_level": 3,
-            "species_count": 1587,
-            "links": {
-              "self": "/api/v1/distributions/rho",
-              "plants": "/api/v1/distributions/rho/plants",
-              "species": "/api/v1/distributions/rho/species"
-            }
-          },
-          {
-            "id": 331,
-            "name": "South Dakota",
-            "slug": "sda",
-            "tdwg_code": "SDA",
-            "tdwg_level": 3,
-            "species_count": 1557,
-            "links": {
-              "self": "/api/v1/distributions/sda",
-              "plants": "/api/v1/distributions/sda/plants",
-              "species": "/api/v1/distributions/sda/species"
-            }
-          },
-          {
-            "id": 168,
-            "name": "Texas",
-            "slug": "tex",
-            "tdwg_code": "TEX",
-            "tdwg_level": 3,
-            "species_count": 5236,
-            "links": {
-              "self": "/api/v1/distributions/tex",
-              "plants": "/api/v1/distributions/tex/plants",
-              "species": "/api/v1/distributions/tex/species"
-            }
-          },
-          {
-            "id": 243,
-            "name": "Vermont",
-            "slug": "ver",
-            "tdwg_code": "VER",
-            "tdwg_level": 3,
-            "species_count": 2294,
-            "links": {
-              "self": "/api/v1/distributions/ver",
-              "plants": "/api/v1/distributions/ver/plants",
-              "species": "/api/v1/distributions/ver/species"
-            }
-          },
-          {
-            "id": 224,
-            "name": "Virginia",
-            "slug": "vrg",
-            "tdwg_code": "VRG",
-            "tdwg_level": 3,
-            "species_count": 2970,
-            "links": {
-              "self": "/api/v1/distributions/vrg",
-              "plants": "/api/v1/distributions/vrg/plants",
-              "species": "/api/v1/distributions/vrg/species"
-            }
-          },
-          {
-            "id": 244,
-            "name": "West Virginia",
-            "slug": "wva",
-            "tdwg_code": "WVA",
-            "tdwg_level": 3,
-            "species_count": 2041,
-            "links": {
-              "self": "/api/v1/distributions/wva",
-              "plants": "/api/v1/distributions/wva/plants",
-              "species": "/api/v1/distributions/wva/species"
-            }
-          },
-          {
-            "id": 258,
-            "name": "Wisconsin",
-            "slug": "wis",
-            "tdwg_code": "WIS",
-            "tdwg_level": 3,
-            "species_count": 2067,
-            "links": {
-              "self": "/api/v1/distributions/wis",
-              "plants": "/api/v1/distributions/wis/plants",
-              "species": "/api/v1/distributions/wis/species"
             }
           }
         ]
@@ -856,13 +544,6 @@ export const samplePlantData = [
         "synonyms": [
           "Cornus paniculata",
           "Swida racemosa",
-          "Swida candidissima",
-          "Cornus gracilis",
-          "Cornus comosa",
-          "Cornus racemosa f. caeruleocarpa",
-          "Cornus racemosa f. nielsenii",
-          "Cornus paniculata var. albida",
-          "Cornus paniculata var. radiata",
           "Swida gracilis",
           "Thelycrania racemosa",
           "Cornus albida",
@@ -891,27 +572,6 @@ export const samplePlantData = [
         "citation": "https://plants.sc.egov.usda.gov/core/profile?symbol=CORA6"
       },
       {
-        "last_update": "2020-06-24T00:34:56.367Z",
-        "id": "urn:lsid:ipni.org:names:271653-1",
-        "name": "POWO",
-        "url": "http://powo.science.kew.org/taxon/urn:lsid:ipni.org:names:271653-1",
-        "citation": "POWO (2019). Plants of the World Online. Facilitated by the Royal Botanic Gardens, Kew. Published on the Internet; http://www.plantsoftheworldonline.org/ Retrieved 2020-06-24"
-      },
-      {
-        "last_update": "2020-06-16T21:27:43.187Z",
-        "id": "Cornus racemosa Lam.",
-        "name": "PlantNet",
-        "url": "https://identify.plantnet.org/species/the-plant-list/Cornus racemosa Lam.",
-        "citation": null
-      },
-      {
-        "last_update": "2020-06-16T21:27:43.200Z",
-        "id": "3082264",
-        "name": "GBIF",
-        "url": "https://www.gbif.org/species/3082264",
-        "citation": null
-      },
-      {
         "last_update": "2020-09-24T09:29:56.281Z",
         "id": "Cornus racemosa",
         "name": "Wikipedia",
@@ -920,4 +580,4 @@ export const samplePlantData = [
       }
     ]
   }
-]
+}
