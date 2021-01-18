@@ -40,7 +40,6 @@ const HomeView = () => {
         setLoading(false)
       })
       .catch(error => console.log(error))
-    console.log('fetch')
   }
 
   const handleFetch = (data) => {

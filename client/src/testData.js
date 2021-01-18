@@ -1,4 +1,4 @@
-export const samplePlantList = [
+export const samplePlantList = {data: [
     {
       "id": 678281,
       "common_name": "Evergreen oak",
@@ -104,7 +104,14 @@ export const samplePlantList = [
         "genus": "/api/v1/genus/plantago"
       }
     }
-]
+],
+  links: {
+    "self": "/api/v1/plants",
+    "first": "/api/v1/plants?page=1",
+    "next": "/api/v1/plants?page=2",
+    "last": "/api/v1/plants?page=18879"
+  }
+}
 
 export const sampleFavorites = [
   {

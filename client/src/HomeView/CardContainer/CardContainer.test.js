@@ -18,7 +18,7 @@ describe('CardContainer', () => {
     render(
       <Router history={history}>
         <CardContainer
-          cardsOnDisplay={samplePlantList}
+          cardsOnDisplay={samplePlantList.data}
           favorites={sampleFavorites}
           addToFavorites={addToFavorites}
           removeFromFavorites={removeFromFavorites}
