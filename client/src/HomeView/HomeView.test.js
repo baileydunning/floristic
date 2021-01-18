@@ -18,6 +18,14 @@ describe('HomeView', () => {
     pageNumber: 1,
     view: 'all'
   }
+  jest.mock('../apiCalls')
+
+  jest.mock('./HomeReducer.js', () => ({
+    FETCH_DATA: () => mockFetchData(),
+    FETCH_LINKS: () => mockFetchLinks(),
+    JUMP_TO_PAGE: () => mockJumpToPage(),
+    TOGGLE_VIEW: () => mockToggleView()
+  }))
   const { result } = renderHook(() => useReducer(homeReducer, mockState))
   const [state, dispatch] = result.current
   
@@ -32,17 +40,9 @@ describe('HomeView', () => {
   const mockToggleView = jest.fn()
   
   
-  jest.mock('../apiCalls')
-  jest.mock('./HomeReducer.js', () => ({
-    FETCH_DATA: () => mockFetchData(),
-    FETCH_LINKS: () => mockFetchLinks(),
-    JUMP_TO_PAGE: () => mockJumpToPage(),
-    TOGGLE_VIEW: () => mockToggleView()
-  }))
   
   
   beforeEach(async () => {
-
     await act(async () => {
       render(
         <Router history={history}>
@@ -61,12 +61,20 @@ describe('HomeView', () => {
   })
 
   it('should dispatch actions', () => {
-
+  
   })
   
-  it('should render the home page', async () => {
+  it('should render the home page', () => {
     const header = screen.getByText('floristic')
     expect(header).toBeInTheDocument()
-    screen.debug()
+  })
+  
+  it('should trigger search', () => {
+    const inputField = screen.getByPlaceholderText('search...')
+    const submitBtn = screen.getByText('GO')
+    userEvent.type(inputField, 'bailey')
+    expect(inputField).toHaveValue('bailey')
+
+    userEvent.click(submitBtn)
   })
 })
