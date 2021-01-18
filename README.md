@@ -5,8 +5,8 @@
 *On your terminal*:
 
 + `git clone git@github.com:baileydunning/floristic.git`
-+ `cd floristic && npm install` 
-   + Tab #1: `cd client && npm start`
-   + Tab #2: `cd proxy && nodemon server.js`
++ `cd floristic` 
+   + Tab #1: `cd client && npm install` > `npm start`
+   + Tab #2: `cd proxy && npm install` > `nodemon server.js`
 
 + `npm test` to run the test suite
