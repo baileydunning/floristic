@@ -1,4 +1,9 @@
+# f l o r i s t i c
+
 ![gif](https://media.giphy.com/media/LfhwOvm2YGVBRxyqvZ/giphy.gif)
+
+## Abstract
+`floristic` is an application that allows the user to explore nearly 400,000 plants species by clicking through pages and searching queries. On first load, the data displayed is a list of plant cards, but the user is able to click 'Learn More' on any of the cards and will be redirected to that plant's feature page. The user is able to add plants to their favorites list which is reflected in their `localStorage`. This data was made accessible by the [Trefle REST API](https://docs.trefle.io/reference). This project was created by Bailey Dunning for the final Mod3 solo project at the Turing School of Software and Design [(see rubric)](https://frontend.turing.io/projects/module-3/binary-challenge.html).Within this repository, the front-end is stored in the `client` folder and the backend is stored in the `proxy` folder.
 
 ## How To Access This Application
 
@@ -10,3 +15,23 @@
    + Tab #2: `cd proxy && npm install` > `nodemon server.js`
 
 + `npm test` to run the test suite
+
+## Tools / Technologies
++ React (with hooks)
++ React Router
++ React Testing Library / Jest
++ JavaScript
++ Express
++ Node.js
++ SCSS
+
+## Created By
+
+[Bailey Dunning](https://www.linkedin.com/in/baileydunning/)
+
+### Project Managers
+
++ [Will Mitchell](https://github.com/wvmitchell)
++ [Leta Keane](https://github.com/letakeane)
+
+
