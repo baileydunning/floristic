@@ -100,6 +100,6 @@ describe('PlantCard', () => {
 
     const learnMoreLink = screen.getByText('Learn More')
     userEvent.click(learnMoreLink)
-    expect(history.location.pathname).toBe('/678281')
+    expect(history.location.pathname).toBe('/plant/678281')
   })
 })

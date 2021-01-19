@@ -7,7 +7,6 @@ describe('SearchBar', () => {
   let handleFetch
   let handleLinks
   let inputField
-  let submitBtn
 
   beforeEach(() => {
     handleFetch = jest.fn()
@@ -20,15 +19,15 @@ describe('SearchBar', () => {
     )
       
     inputField = screen.getByPlaceholderText('search...')
-    submitBtn = screen.getByText('GO')
   })
-
+  
   it('should render the search bar', () => {
     expect(inputField).toBeInTheDocument()
   })
-
+  
   it('should call onSubmit on click', async () => {
     userEvent.type(inputField, 'bailey')
+
     expect(inputField).toHaveValue('bailey')
   })
 })

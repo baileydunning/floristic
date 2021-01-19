@@ -19,8 +19,7 @@ describe('Header', () => {
     render(
       <HomeContext.Provider value={mockContext}>
         <Header
-          handleFetch={handleFetch}
-          handleLinks={handleLinks}
+          query={null}
           toggleView={toggleView}
         />
       </HomeContext.Provider>
@@ -31,9 +30,7 @@ describe('Header', () => {
 
   it('should render the toggle button', () => {
     const title = screen.getByText('floristic')
-
-    expect(header).toBeInTheDocument()
-    expect(title).toBeInTheDocument()
+    expect(header && title).toBeInTheDocument()
   })
 
   it('should mock the context', () => {
@@ -43,10 +40,7 @@ describe('Header', () => {
 
   it('should render the search bar', () => {
     const searchField = screen.getByPlaceholderText('search...')
-    const submitButton = screen.getByText('GO')
-
     expect(searchField).toBeInTheDocument()
-    expect(submitButton).toBeInTheDocument()
   })
 
   it('should render the toggle button', () => {
