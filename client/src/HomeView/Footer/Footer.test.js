@@ -1,27 +1,24 @@
 import Footer from './Footer'
-import HomeContext from '../HomeContext'
 import { screen, render } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import '@testing-library/jest-dom'
+import { Router } from 'react-router'
+import { createMemoryHistory } from 'history'
 
 describe('Footer', () => {
-  let determineMaxPage
-  let jumpToPage
+  const history = createMemoryHistory()
+  const jumpToPage = jest.fn()
 
   describe('FirstPage', () => {
     beforeEach(() => {
-      const mockContext = { pageNumber: 1 }
-      determineMaxPage = jest.fn()
-      jumpToPage = jest.fn()
-      determineMaxPage.mockImplementation(() => '5')
-
       render(
-        <HomeContext.Provider value={mockContext}>
+        <Router history={history}>
           <Footer
-            determineMaxPage={determineMaxPage}
+            pageNumber={1}
+            maxPage={'3'}
             jumpToPage={jumpToPage}
           />
-        </HomeContext.Provider>
+        </Router>
       )
     })
 
@@ -30,7 +27,7 @@ describe('Footer', () => {
       expect(footer).toBeInTheDocument()
     })
 
-    it('should mock the context', () => {
+    it('should display pageNumber', () => {
       const pageNumber = screen.getByText('1')
       expect(pageNumber).toBeInTheDocument()
     })
@@ -50,18 +47,14 @@ describe('Footer', () => {
 
   describe('LastPage', () => {
     beforeEach(() => {
-      const mockContext = { pageNumber: 5 }
-      determineMaxPage = jest.fn()
-      jumpToPage = jest.fn()
-      determineMaxPage.mockImplementation(() => '5')
-
       render(
-        <HomeContext.Provider value={mockContext}>
+        <Router history={history}>
           <Footer
-            determineMaxPage={determineMaxPage}
+            pageNumber={3}
+            maxPage={'3'}
             jumpToPage={jumpToPage}
           />
-        </HomeContext.Provider>
+        </Router>
       )
     })
 
@@ -70,11 +63,12 @@ describe('Footer', () => {
       expect(navigatePageBtns.length).toBe(1)
     })
 
-    it('should be able to click to the next page', () => {
+    it('should be able to click to the previous page', () => {
       const prevPageBtn = screen.getByText('←')
       userEvent.click(prevPageBtn)
       expect(jumpToPage).toHaveBeenCalledTimes(1)
-      expect(jumpToPage).toHaveBeenCalledWith(4)
+      expect(jumpToPage).toHaveBeenCalledWith(2)
     })
   })
+
 })

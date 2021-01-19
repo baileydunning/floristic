@@ -26,7 +26,6 @@ describe('App', () => {
   })
 
   it('should redirect to a plant page', () => {
-    history.location.pathname = '/117699'
-    screen.debug()
+    
   })
 })

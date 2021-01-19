@@ -14,7 +14,7 @@ const HomeView = ({ query, page }) => {
   const [state, dispatch] = useReducer(homeReducer, initialState)
   const [cardsOnDisplay, setCardsOnDisplay] = useState(state.plantList)
   const [favorites, setFavorites] = useState([])
-  const [pageNumber, setPageNumber] = useState(page || 1)
+  const [pageNumber, setPageNumber] = useState(page)
   const [search, setSearch] = useState(query)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
@@ -103,6 +103,10 @@ const HomeView = ({ query, page }) => {
 
   const updateSearch = (queryRequest) => {
     setSearch(queryRequest)
+
+    if (state.view === 'favorites') {
+      toggleView()
+    }
   }
 
   const jumpToPage = (page) => {
