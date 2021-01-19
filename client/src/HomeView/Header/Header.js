@@ -2,11 +2,11 @@ import SearchBar from './SearchBar/SearchBar'
 import ToggleView from './ToggleView/ToggleView'
 import './Header.scss'
 
-const Header = ({ handleFetch, toggleView }) => {
+const Header = ({ updateSearch, toggleView }) => {
   return (
-    <header className='header'>
+    <header className='header' data-testid='header'>
       <h1 className='title'>floristic</h1>
-      <SearchBar handleFetch={handleFetch} />
+      <SearchBar updateSearch={updateSearch} />
       <ToggleView toggleView={toggleView} />
     </header>
   )

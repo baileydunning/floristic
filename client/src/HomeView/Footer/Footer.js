@@ -1,17 +1,38 @@
-import { useContext } from 'react'
-import HomeContext from '../HomeContext'
+import { useEffect, useState } from 'react'
 import './Footer.scss'
 
-// make dynamic to interpolate link pages
+const Footer = ({ pageNumber, maxPage, jumpToPage }) => {
+  const [maximum, setMaximum] = useState('10')
+ 
+  useEffect(() => {  
+    if (maxPage.includes('&q')) {
+      let newMax = maxPage.split('&')[0]
+      setMaximum(parseInt(newMax))
+    } else {
+      setMaximum(parseInt(maxPage))
+    }
+  }, [maximum, maxPage])
 
-const Footer = ({ maxPage, jumpToPage }) => {
-  const context = useContext(HomeContext)
+  const handleClick = (event, num) => {
+    event.preventDefault()
+    jumpToPage(num)
+  }
 
   return (
-    <footer className='footer'>
-      { context.pageNumber > 1 && <button onClick={() => jumpToPage(context.pageNumber -= 1)}>←</button>}
-      <p>{context.pageNumber}</p>
-      { context.pageNumber < maxPage && <button onClick={() => jumpToPage(context.pageNumber += 1)}>→</button>}
+    <footer className='footer' data-testid='footer'>
+      { parseInt(pageNumber) > 1 && 
+        <button 
+          onClick={(event) => handleClick(event, parseInt(pageNumber) - 1)}>
+          ←
+        </button>
+      }
+      <p>{ pageNumber }</p>
+      { parseInt(pageNumber) < maximum && 
+        <button 
+          onClick={(event) => handleClick(event, parseInt(pageNumber) + 1)}>
+          →
+        </button>
+      }
     </footer>
   )
 }

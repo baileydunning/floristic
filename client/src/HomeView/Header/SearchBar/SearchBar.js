@@ -1,37 +1,35 @@
-import { useContext, useState } from 'react'
-import { searchPlants } from '../../../apiCalls'
+import { useState } from 'react'
+import { useHistory } from 'react-router-dom'
+
 import './SearchBar.scss'
-
-const SearchBar = ({ handleFetch }) => {
+const SearchBar = ({ updateSearch }) => {
   const [userInput, setUserInput] = useState('')
+  const history = useHistory()
 
-  const fetchQueryResults = (event) => {
+  const submitSearch = (event) => {
     event.preventDefault()
-    searchPlants(userInput)
-      .then(data => {
-        handleFetch(data.data)
-        setUserInput('')
-      })
-      .catch(error => console.log(error))
+    updateSearch(userInput)
+    history.push(`/search/${userInput}/1`)
+    setUserInput('')
   }
 
   return (
     <form
-      className='search-form'
-      onSubmit={(event) => fetchQueryResults(event)}>
+      onSubmit={(event) => submitSearch(event)}
+      className='search-form'>
       <label>search for plants by name, location, or whatever you want.
-      <input
+        <input
           type='text'
           className='search-input'
           placeholder='search...'
           onChange={(event) => setUserInput(event.target.value)}
           value={userInput}
         />
-        <input
-          className='submit'
-          type='submit'
-          value='GO'
-        />
+        {userInput &&
+          <button onClick={(event) => submitSearch(event)}>
+            GO
+          </button>
+        }
       </label>
     </form>
   )

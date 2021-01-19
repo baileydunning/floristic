@@ -1,26 +1,36 @@
 import React, { useEffect, useState, useReducer } from 'react'
+import { useHistory } from 'react-router-dom'
 import HomeContext from './HomeContext'
 import { initialState, homeReducer } from './HomeReducer'
 import Header from './Header/Header'
 import CardContainer from './CardContainer/CardContainer'
 import Loading from '../Loading/Loading'
 import Footer from './Footer/Footer'
-import { getPlantList } from '../apiCalls'
+import Error from '../Error/Error'
+import { getPlantList, searchPlants } from '../apiCalls'
 
-const HomeView = () => {
+const HomeView = ({ query, page }) => {
+  const history = useHistory()
   const [state, dispatch] = useReducer(homeReducer, initialState)
   const [cardsOnDisplay, setCardsOnDisplay] = useState(state.plantList)
   const [favorites, setFavorites] = useState([])
+  const [pageNumber, setPageNumber] = useState(page)
+  const [search, setSearch] = useState(query)
   const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
 
   useEffect(() => {
     retrieveFromStorage()
   }, [localStorage])
-
+  
   useEffect(() => {
     saveToStorage()
   }, [favorites])
-
+  
+  useEffect(() => {
+    fetchPlantList()
+  }, [search, page])
+  
   useEffect(() => {
     (state.plantList.length === 0) && fetchPlantList()
 
@@ -29,17 +39,27 @@ const HomeView = () => {
     } else {
       setCardsOnDisplay(favorites)
     }
-  }, [state.view, state.plantList, state.pageNumber, favorites])
+  }, [state.view, state.plantList, favorites])
 
   const fetchPlantList = () => {
     setLoading(true)
-    getPlantList(state.pageNumber)
-      .then(data => {
-        handleFetch(data.data)
-        setLoading(false)
-      })
-      .catch(error => console.log(error))
-    console.log('fetch')
+    if (!search) {
+      getPlantList(pageNumber)
+        .then(data => {
+          handleFetch(data.data)
+          handleLinks(data.links)
+          setLoading(false)
+        })
+        .catch(err => setError(err))
+    } else {
+      searchPlants(search, pageNumber)
+        .then(data => {
+          handleFetch(data.data)
+          handleLinks(data.links)
+          setLoading(false)
+        })
+        .catch(err => setError(err))
+    }
   }
 
   const handleFetch = (data) => {
@@ -47,10 +67,9 @@ const HomeView = () => {
     dispatch(action)
   }
 
-  const jumpToPage = (page) => {
-    const action = { type: 'JUMP_TO_PAGE', pageNumber: page }
+  const handleLinks = (links) => {
+    const action = { type: 'FETCH_LINKS', links: links }
     dispatch(action)
-    fetchPlantList()
   }
 
   const toggleView = () => {
@@ -74,23 +93,48 @@ const HomeView = () => {
   const addToFavorites = (plant) => {
     setFavorites([...favorites, plant])
     saveToStorage()
-    console.log('added plant to favorites')
-    console.log(localStorage.favorites)
   }
 
   const removeFromFavorites = (id) => {
     const favPlants = favorites.filter(plant => plant.id !== id)
     setFavorites(favPlants)
     saveToStorage()
-    console.log('removed plant from favorites')
+  }
+
+  const updateSearch = (queryRequest) => {
+    setSearch(queryRequest)
+
+    if (state.view === 'favorites') {
+      toggleView()
+    }
+  }
+
+  const jumpToPage = (page) => {
+    setPageNumber(page)
+    fetchPlantList()
+
+    if (search) {
+      history.push(`/search/${search}/${pageNumber}`)
+    } else {
+      history.push(`/${pageNumber}`)
+    }
+  }
+
+  const determineMaxPage = () => {
+    if (state.links.last) {
+      return state.links.last.split('=')[1]
+    } else {
+      return '1'
+    }
   }
 
   return (
     <HomeContext.Provider value={state}>
+      {!error ?
       <section>
         <Header
-          handleFetch={handleFetch}
           toggleView={toggleView}
+          updateSearch={updateSearch}
         />
         {!loading ?
           <CardContainer
@@ -101,8 +145,16 @@ const HomeView = () => {
           /> :
           <Loading />
         }
-        {state.view === 'all' && <Footer jumpToPage={jumpToPage} />}
-      </section>
+        {state.view === 'all' && 
+          <Footer
+            pageNumber={page}
+            maxPage={determineMaxPage()} 
+            jumpToPage={jumpToPage} 
+          />
+        }
+      </section> :
+      <Error />
+    }
     </HomeContext.Provider>
   )
 }

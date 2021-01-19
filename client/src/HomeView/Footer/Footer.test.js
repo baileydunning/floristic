@@ -1,49 +1,74 @@
 import Footer from './Footer'
-import HomeContext from '../HomeContext'
 import { screen, render } from '@testing-library/react'
-import '@testing-library/jest-dom'
-import '@testing-library/jest-dom/extend-expect'
 import userEvent from '@testing-library/user-event'
-import { Router } from 'react-router-dom'
+import '@testing-library/jest-dom'
+import { Router } from 'react-router'
 import { createMemoryHistory } from 'history'
 
 describe('Footer', () => {
-  let nextPage
-  let prevPage
+  const history = createMemoryHistory()
+  const jumpToPage = jest.fn()
 
-  const customRender = (ui, { providerProps, ...renderOptions }) => {
-    return render(
-      <HomeContext.Provider value={providerProps}>{ui}</HomeContext.Provider>,
-      renderOptions
-    )
-  }
+  describe('FirstPage', () => {
+    beforeEach(() => {
+      render(
+        <Router history={history}>
+          <Footer
+            pageNumber={1}
+            maxPage={'3'}
+            jumpToPage={jumpToPage}
+          />
+        </Router>
+      )
+    })
 
+    it('should render the footer', () => {
+      const footer = screen.getByTestId('footer')
+      expect(footer).toBeInTheDocument()
+    })
 
-  // beforeEach(() => {
-  //   render(
-  //       <HomeContext.Consumer>
-  //         <Footer />
-  //       </HomeContext.Consumer>
-  //   )
+    it('should display pageNumber', () => {
+      const pageNumber = screen.getByText('1')
+      expect(pageNumber).toBeInTheDocument()
+    })
 
-  //   nextPage = screen.getByText('Next page')
-  //   prevPage = screen.getByText('Previous page')
-  // })
+    it('should not show previous button on first page', () => {
+      const navigatePageBtns = screen.getAllByRole('button')
+      expect(navigatePageBtns.length).toBe(1)
+    })
 
-  it('should have a default page number from Provider', () => {
-    const providerProps = {
-      pageNumber: 1
-    }
-
-    customRender(<Footer />, providerProps)
-    screen.debug()
-
+    it('should be able to click to the next page', () => {
+      const nextPageBtn = screen.getByText('→')
+      userEvent.click(nextPageBtn)
+      expect(jumpToPage).toHaveBeenCalledTimes(1)
+      expect(jumpToPage).toHaveBeenCalledWith(2)
+    })
   })
 
-  it('should render the footer', () => {
+  describe('LastPage', () => {
+    beforeEach(() => {
+      render(
+        <Router history={history}>
+          <Footer
+            pageNumber={3}
+            maxPage={'3'}
+            jumpToPage={jumpToPage}
+          />
+        </Router>
+      )
+    })
+
+    it('should not show next button on last page', () => {
+      const navigatePageBtns = screen.getAllByRole('button')
+      expect(navigatePageBtns.length).toBe(1)
+    })
+
+    it('should be able to click to the previous page', () => {
+      const prevPageBtn = screen.getByText('←')
+      userEvent.click(prevPageBtn)
+      expect(jumpToPage).toHaveBeenCalledTimes(1)
+      expect(jumpToPage).toHaveBeenCalledWith(2)
+    })
   })
 
-  it('should redirect to a new url', () => {
-    
-  })
 })

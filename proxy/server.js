@@ -5,9 +5,6 @@ const app = express()
 app.use(express.json())
 app.use(cors())
 
-// https://trefle.io/api/v1
-// token = w76udTztX_89MySv3fO4fG41HD2yq9xhIRETq1KCXCg
-
 const makeApiCall = (url) => {
   return new Promise((resolve, reject) => {
     request(url, { json: true }, (err, res, body) => {
@@ -31,10 +28,11 @@ app.get('/plant/:id', (req, res) => {
   .catch(error => res.send(error))
 })
 
-app.get('/plants/search/:query', (req, res) => {
+app.get('/plants/search/:query/:page', (req, res) => {
   const { query } = req.params
+  const { page } = req.params
 
-  const url = `https://trefle.io/api/v1/plants/search?q=${query}&page=1&token=w76udTztX_89MySv3fO4fG41HD2yq9xhIRETq1KCXCg`
+  const url = `https://trefle.io/api/v1/plants/search?page=${page}&q=${query}&token=w76udTztX_89MySv3fO4fG41HD2yq9xhIRETq1KCXCg`
 
   makeApiCall(url)
     .then(response => res.json(response))
