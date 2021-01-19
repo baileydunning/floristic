@@ -10,7 +10,7 @@ describe('Header', () => {
   let toggleView
 
   beforeEach(() => {
-    const mockContext = { view: 'all', pageNumber: 1 }
+    const mockContext = { view: 'all' }
     
     handleFetch = jest.fn()
     handleLinks = jest.fn()

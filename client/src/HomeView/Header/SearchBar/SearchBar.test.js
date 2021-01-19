@@ -4,18 +4,11 @@ import userEvent from '@testing-library/user-event'
 import '@testing-library/jest-dom'
 
 describe('SearchBar', () => {
-  let handleFetch
-  let handleLinks
   let inputField
 
   beforeEach(() => {
-    handleFetch = jest.fn()
-    handleLinks = jest.fn()
     render(
-      <SearchBar
-      handleFetch={handleFetch}
-      handleLinks={handleLinks}
-      />
+      <SearchBar query={null} />
     )
       
     inputField = screen.getByPlaceholderText('search...')
@@ -25,9 +18,11 @@ describe('SearchBar', () => {
     expect(inputField).toBeInTheDocument()
   })
   
-  it('should call onSubmit on click', async () => {
+  it('should render submit button with value', async () => {
     userEvent.type(inputField, 'bailey')
-
     expect(inputField).toHaveValue('bailey')
+
+    const submitBtn = screen.getByText('GO')
+    expect(submitBtn).toBeInTheDocument()
   })
 })

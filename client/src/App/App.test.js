@@ -2,7 +2,6 @@ import App from './App'
 import { render, screen } from '@testing-library/react'
 import { Router } from 'react-router-dom'
 import { createMemoryHistory } from 'history'
-import userEvent from '@testing-library/user-event'
 import '@testing-library/jest-dom'
 
 describe('App', () => {
@@ -23,9 +22,5 @@ describe('App', () => {
     const footer = screen.getByTestId('footer')
 
     expect(title && searchBar && toggleBtn && footer).toBeInTheDocument()
-  })
-
-  it('should redirect to a plant page', () => {
-    
   })
 })

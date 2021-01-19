@@ -5,9 +5,8 @@ import { renderHook, act } from '@testing-library/react-hooks'
 import { Router } from 'react-router-dom'
 import { createMemoryHistory } from 'history'
 import userEvent from '@testing-library/user-event'
-import { samplePlantList, sampleFavorites, samplePlantData } from '../testData'
+import { samplePlantList } from '../testData'
 import '@testing-library/jest-dom'
-import { getPlantList } from '../apiCalls'
 import { homeReducer } from './HomeReducer'
 
 
@@ -15,7 +14,6 @@ describe('HomeView', () => {
   const mockState = {
     plantList: samplePlantList.data,
     links: samplePlantList.links,
-    pageNumber: 1,
     view: 'all'
   }
   jest.mock('../apiCalls')
@@ -39,9 +37,6 @@ describe('HomeView', () => {
   const mockJumpToPage = jest.fn()
   const mockToggleView = jest.fn()
   
-  
-  
-  
   beforeEach(async () => {
     await act(async () => {
       render(
@@ -57,11 +52,6 @@ describe('HomeView', () => {
     expect(state.plantList.length).toBe(4)
     expect(state.links).toBeTruthy()
     expect(state.view).toBe('all')
-    expect(state.pageNumber).toBe(1)
-  })
-
-  it('should dispatch actions', () => {
-  
   })
   
   it('should render the home page', () => {
@@ -75,5 +65,9 @@ describe('HomeView', () => {
     const submitBtn = screen.getByText('GO')
     expect(inputField).toHaveValue('bailey')
     expect(submitBtn).toBeInTheDocument()
+  })
+
+  it('should render toggle button', () => {
+    const toggleBtn = screen.getByAltText
   })
 })
