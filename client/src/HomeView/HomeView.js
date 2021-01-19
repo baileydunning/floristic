@@ -6,6 +6,7 @@ import Header from './Header/Header'
 import CardContainer from './CardContainer/CardContainer'
 import Loading from '../Loading/Loading'
 import Footer from './Footer/Footer'
+import Error from '../Error/Error'
 import { getPlantList, searchPlants } from '../apiCalls'
 
 const HomeView = ({ query, page }) => {
@@ -13,6 +14,7 @@ const HomeView = ({ query, page }) => {
   const [state, dispatch] = useReducer(homeReducer, initialState)
   const [cardsOnDisplay, setCardsOnDisplay] = useState(state.plantList)
   const [favorites, setFavorites] = useState([])
+  const [pageNumber, setPageNumber] = useState(page || 1)
   const [search, setSearch] = useState(query)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
@@ -20,15 +22,15 @@ const HomeView = ({ query, page }) => {
   useEffect(() => {
     retrieveFromStorage()
   }, [localStorage])
-
+  
   useEffect(() => {
     saveToStorage()
   }, [favorites])
-
+  
   useEffect(() => {
     fetchPlantList()
-  }, [search])
-
+  }, [search, page])
+  
   useEffect(() => {
     (state.plantList.length === 0) && fetchPlantList()
 
@@ -37,12 +39,12 @@ const HomeView = ({ query, page }) => {
     } else {
       setCardsOnDisplay(favorites)
     }
-  }, [state.view, state.plantList, page, favorites])
+  }, [state.view, state.plantList, favorites])
 
   const fetchPlantList = () => {
     setLoading(true)
     if (!search) {
-      getPlantList(page)
+      getPlantList(pageNumber)
         .then(data => {
           handleFetch(data.data)
           handleLinks(data.links)
@@ -50,7 +52,7 @@ const HomeView = ({ query, page }) => {
         })
         .catch(err => setError(err))
     } else {
-      searchPlants(search)
+      searchPlants(search, pageNumber)
         .then(data => {
           handleFetch(data.data)
           handleLinks(data.links)
@@ -68,14 +70,6 @@ const HomeView = ({ query, page }) => {
   const handleLinks = (links) => {
     const action = { type: 'FETCH_LINKS', links: links }
     dispatch(action)
-  }
-
-  const jumpToPage = (pageNumber) => {
-    // const action = { type: 'JUMP_TO_PAGE', pageNumber: page }
-    // dispatch(action)
-    // fetchPlantList()
-    page = pageNumber
-    fetchPlantList()
   }
 
   const toggleView = () => {
@@ -111,6 +105,17 @@ const HomeView = ({ query, page }) => {
     setSearch(queryRequest)
   }
 
+  const jumpToPage = (page) => {
+    setPageNumber(page)
+    fetchPlantList()
+
+    if (search) {
+      history.push(`/search/${search}/${pageNumber}`)
+    } else {
+      history.push(`/${pageNumber}`)
+    }
+  }
+
   const determineMaxPage = () => {
     if (state.links.last) {
       return state.links.last.split('=')[1]
@@ -121,6 +126,7 @@ const HomeView = ({ query, page }) => {
 
   return (
     <HomeContext.Provider value={state}>
+      {!error ?
       <section>
         <Header
           toggleView={toggleView}
@@ -137,11 +143,14 @@ const HomeView = ({ query, page }) => {
         }
         {state.view === 'all' && 
           <Footer
-            determineMaxPage={determineMaxPage} 
+            pageNumber={page}
+            maxPage={determineMaxPage()} 
             jumpToPage={jumpToPage} 
           />
         }
-      </section>
+      </section> :
+      <Error />
+    }
     </HomeContext.Provider>
   )
 }

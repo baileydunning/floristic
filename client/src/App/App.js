@@ -21,7 +21,7 @@ const App = () => {
         />
         <Route
           exact
-          path='/pg:page'
+          path='/:page'
           render={({ match }) => 
             <HomeView 
               query={null}
@@ -31,7 +31,7 @@ const App = () => {
         />
         <Route
           exact
-          path='/search/:query/pg:page'
+          path='/search/:query/:page'
           render={({ match }) =>
             <HomeView 
               query={match.params.query}

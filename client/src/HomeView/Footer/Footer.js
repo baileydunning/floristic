@@ -1,35 +1,34 @@
 import { useContext, useEffect, useState } from 'react'
-import HomeContext from '../HomeContext'
 import './Footer.scss'
 
-const Footer = ({ determineMaxPage, jumpToPage }) => {
-  const [maxPage, setMaxPage] = useState(1)
-  const context = useContext(HomeContext)
-  
-  useEffect(() => {
-    let pageNum = determineMaxPage()
-    
-    if (pageNum.includes('&q')) {
-      pageNum = pageNum.split('&')[0]
-      setMaxPage(parseInt(pageNum))
+const Footer = ({ pageNumber, maxPage, jumpToPage }) => {
+  const [maximum, setMaximum] = useState('1')
+ 
+  useEffect(() => {  
+    if (maxPage.includes('&q')) {
+      let newMax = maxPage.split('&')[0]
+      setMaximum(parseInt(newMax))
     } else {
-      setMaxPage(parseInt(pageNum))
+      setMaximum(parseInt(maxPage))
     }
-  })
+  }, [maximum])
+
 
   return (
     <footer className='footer' data-testid='footer'>
-      { context.pageNumber > 1 && 
+      { parseInt(pageNumber) > 1 && 
         <button 
-          onClick={() => jumpToPage(context.pageNumber -= 1)}>
+          onClick={() => jumpToPage(parseInt(pageNumber) - 1)}>
           ←
-        </button>}
-      <p>{ context.pageNumber }</p>
-      { context.pageNumber < maxPage && 
+        </button>
+      }
+      <p>{ pageNumber }</p>
+      { parseInt(pageNumber) < maximum && 
         <button 
-          onClick={() => jumpToPage(context.pageNumber += 1)}>
+          onClick={() => jumpToPage(parseInt(pageNumber) + 1)}>
           →
-        </button>}
+        </button>
+      }
     </footer>
   )
 }

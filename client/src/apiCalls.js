@@ -12,8 +12,8 @@ export const getPlant = async (id) => {
   return data
 }
 
-export const searchPlants = async (query) => {
-  let url = `http://localhost:3001/plants/search/${query}`
+export const searchPlants = async (query, page) => {
+  let url = `http://localhost:3001/plants/search/${query}/${page}`
   const response = await fetch(url)
   const data = await response.json()
   return data
