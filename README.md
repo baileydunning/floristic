@@ -16,7 +16,7 @@
 
 + `npm test` to run the test suite
 
-![gif](https://media.giphy.com/media/p4pCbEzPevBJWdj2y4/giphy.gif)
+![gif2](https://media.giphy.com/media/DRM3jtlkB7htuowXom/giphy.gif)
 
 ## Tools / Technologies
 + React (with hooks)
@@ -26,6 +26,8 @@
 + Express
 + Node.js
 + SCSS
+
+![gif3](https://media.giphy.com/media/oU1q3biKPfxYcu0WXQ/giphy.gif)
 
 ## Created By
 
