@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useReducer } from 'react'
+import { useHistory } from 'react-router-dom'
 import HomeContext from './HomeContext'
 import { initialState, homeReducer } from './HomeReducer'
 import Header from './Header/Header'
@@ -7,14 +8,15 @@ import Loading from '../Loading/Loading'
 import Footer from './Footer/Footer'
 import { getPlantList, searchPlants } from '../apiCalls'
 
-const HomeView = ({ query }) => {
+const HomeView = ({ query, page }) => {
+  const history = useHistory()
   const [state, dispatch] = useReducer(homeReducer, initialState)
   const [cardsOnDisplay, setCardsOnDisplay] = useState(state.plantList)
   const [favorites, setFavorites] = useState([])
   const [search, setSearch] = useState(query)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
-  
+
   useEffect(() => {
     retrieveFromStorage()
   }, [localStorage])
@@ -24,6 +26,10 @@ const HomeView = ({ query }) => {
   }, [favorites])
 
   useEffect(() => {
+    fetchPlantList()
+  }, [search])
+
+  useEffect(() => {
     (state.plantList.length === 0) && fetchPlantList()
 
     if (state.view === 'all') {
@@ -31,12 +37,12 @@ const HomeView = ({ query }) => {
     } else {
       setCardsOnDisplay(favorites)
     }
-  }, [state.view, state.plantList, state.pageNumber, favorites])
+  }, [state.view, state.plantList, page, favorites])
 
   const fetchPlantList = () => {
     setLoading(true)
     if (!search) {
-      getPlantList(state.pageNumber)
+      getPlantList(page)
         .then(data => {
           handleFetch(data.data)
           handleLinks(data.links)
@@ -64,9 +70,11 @@ const HomeView = ({ query }) => {
     dispatch(action)
   }
 
-  const jumpToPage = (page) => {
-    const action = { type: 'JUMP_TO_PAGE', pageNumber: page }
-    dispatch(action)
+  const jumpToPage = (pageNumber) => {
+    // const action = { type: 'JUMP_TO_PAGE', pageNumber: page }
+    // dispatch(action)
+    // fetchPlantList()
+    page = pageNumber
     fetchPlantList()
   }
 
@@ -101,7 +109,6 @@ const HomeView = ({ query }) => {
 
   const updateSearch = (queryRequest) => {
     setSearch(queryRequest)
-    fetchPlantList()
   }
 
   const determineMaxPage = () => {

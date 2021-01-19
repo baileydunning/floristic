@@ -1,21 +1,22 @@
 import { useState } from 'react'
-import { Redirect } from 'react-router'
-import { Link, useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 
 import './SearchBar.scss'
 const SearchBar = ({ updateSearch }) => {
   const [userInput, setUserInput] = useState('')
   const history = useHistory()
-  
+
   const submitSearch = (event) => {
     event.preventDefault()
     updateSearch(userInput)
-    history.push(`/search/${userInput}`)
+    history.push(`/search/${userInput}/1`)
     setUserInput('')
   }
 
   return (
-    <form className='search-form'>
+    <form
+      onSubmit={(event) => submitSearch(event)}
+      className='search-form'>
       <label>search for plants by name, location, or whatever you want.
         <input
           type='text'
@@ -26,8 +27,8 @@ const SearchBar = ({ updateSearch }) => {
         />
         {userInput &&
           <button onClick={(event) => submitSearch(event)}>
-          go
-        </button>
+            GO
+          </button>
         }
       </label>
     </form>

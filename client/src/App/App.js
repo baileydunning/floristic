@@ -12,15 +12,31 @@ const App = () => {
         <Route
           exact
           path='/'
-          render={() => 
-            <HomeView query={null} />
+          render={() =>
+            <HomeView
+              query={null}
+              page={1}
+            />
           }
         />
         <Route
           exact
-          path='/search/:query'
+          path='/pg:page'
+          render={({ match }) => 
+            <HomeView 
+              query={null}
+              page={match.params.page}
+            />
+          }
+        />
+        <Route
+          exact
+          path='/search/:query/pg:page'
           render={({ match }) =>
-            <HomeView query={match.params.query} />
+            <HomeView 
+              query={match.params.query}
+              page={match.params.page}
+            />
           }
         />
         <Route

@@ -31,10 +31,11 @@ app.get('/plant/:id', (req, res) => {
   .catch(error => res.send(error))
 })
 
-app.get('/plants/search/:query', (req, res) => {
+app.get('/plants/search/:query/:page', (req, res) => {
   const { query } = req.params
+  const { page } = req.params
 
-  const url = `https://trefle.io/api/v1/plants/search?q=${query}&page=1&token=w76udTztX_89MySv3fO4fG41HD2yq9xhIRETq1KCXCg`
+  const url = `https://trefle.io/api/v1/plants/search?q=${query}&page=${page}&token=w76udTztX_89MySv3fO4fG41HD2yq9xhIRETq1KCXCg`
 
   makeApiCall(url)
     .then(response => res.json(response))
