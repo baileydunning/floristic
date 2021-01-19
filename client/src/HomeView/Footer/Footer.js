@@ -13,23 +13,18 @@ const Footer = ({ pageNumber, maxPage, jumpToPage }) => {
     }
   }, [maximum, maxPage])
 
-  const handleClick = (event, num) => {
-    event.preventDefault()
-    jumpToPage(num)
-  }
-
   return (
     <footer className='footer' data-testid='footer'>
       { parseInt(pageNumber) > 1 && 
         <button 
-          onClick={(event) => handleClick(event, parseInt(pageNumber) - 1)}>
+          onClick={() => jumpToPage(parseInt(pageNumber) - 1)}>
           ←
         </button>
       }
       <p>{ pageNumber }</p>
       { parseInt(pageNumber) < maximum && 
         <button 
-          onClick={(event) => handleClick(event, parseInt(pageNumber) + 1)}>
+          onClick={() => jumpToPage(parseInt(pageNumber) + 1)}>
           →
         </button>
       }

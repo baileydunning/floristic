@@ -17,7 +17,7 @@ const SearchBar = ({ updateSearch }) => {
     <form
       onSubmit={(event) => submitSearch(event)}
       className='search-form'>
-      <label>search for plants by name, location, or whatever you want.
+      <label>search over 400K plants by name, location, or whatever you want.
         <input
           type='text'
           className='search-input'
