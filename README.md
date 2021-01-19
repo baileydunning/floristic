@@ -16,6 +16,8 @@
 
 + `npm test` to run the test suite
 
+![gif](https://media.giphy.com/media/p4pCbEzPevBJWdj2y4/giphy.gif)
+
 ## Tools / Technologies
 + React (with hooks)
 + React Router
