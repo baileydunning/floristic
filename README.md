@@ -7,6 +7,8 @@
 
 ## How To Access This Application
 
+### [Visit the live site](https://floristic.herokuapp.com/floristic/)
+
 *On your terminal*:
 
 + `git clone git@github.com:baileydunning/floristic.git`
