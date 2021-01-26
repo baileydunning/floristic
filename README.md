@@ -7,7 +7,7 @@
 
 ## How To Access This Application
 
-### [Visit the live site](https://floristic.herokuapp.com/floristic/)
+### [Visit the live site](https://floristic.herokuapp.com/)
 
 *On your terminal*:
 
@@ -33,9 +33,6 @@
 
 ## Next Steps
 + Create more integration tests using reducer in `HomeView`
-+ Fix bug with next page button (have to click twice for some reason)
-+ Fix bug with localStorage that favorites are occasionally one object behind
-+ Style `FeatureView` layout with SCSS
 
 ## Created By
 
