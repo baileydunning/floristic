@@ -1,0 +1,35 @@
+@import '../../index.scss';
+
+.footer {
+  @include row-wrap;
+  height: 20vh;
+  justify-content: center;
+  align-items: center;
+  background-color: $charcoal;
+  box-shadow: 0px 0px 0px black, 0px -7px 15px white;
+  p {
+    font-size: 2em;
+    padding: 0 5%;
+    color: white;
+  }
+  button {
+    border: none;
+    border-radius: 50%;
+    font-size: xx-large;
+    background-color: white;
+    color: $teal;
+    box-shadow: 5px 5px 10px black;
+    outline: none;
+      &:hover {
+        @include button-hover;
+      }
+  }
+}
+
+.page-form {
+  padding: 2%;
+}
+
+.page-input {
+  outline: none;
+}
