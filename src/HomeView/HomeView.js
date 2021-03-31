@@ -22,15 +22,15 @@ const HomeView = ({ query, page }) => {
   useEffect(() => {
     retrieveFromStorage()
   }, [localStorage])
-  
+
   useEffect(() => {
     saveToStorage()
   }, [favorites])
-  
+
   useEffect(() => {
     fetchPlantList()
   }, [search, page])
-  
+
   useEffect(() => {
     (state.plantList.length === 0) && fetchPlantList()
 
@@ -46,20 +46,23 @@ const HomeView = ({ query, page }) => {
     if (!search) {
       getPlantList(pageNumber)
         .then(data => {
-          handleFetch(data.data)
-          handleLinks(data.links)
-          setLoading(false)
+          makeFetchHappen(data)
+          history.push(`/${pageNumber}`)
         })
         .catch(err => setError(err))
     } else {
       searchPlants(search, pageNumber)
         .then(data => {
-          handleFetch(data.data)
-          handleLinks(data.links)
-          setLoading(false)
+          makeFetchHappen(data)
         })
         .catch(err => setError(err))
     }
+  }
+
+  const makeFetchHappen = (data) => {
+    handleFetch(data.data)
+    handleLinks(data.links)
+    setLoading(false)
   }
 
   const handleFetch = (data) => {
@@ -80,8 +83,10 @@ const HomeView = ({ query, page }) => {
   const retrieveFromStorage = () => {
     const storedFavorites = localStorage.getItem('favorites')
     const parsedFavorites = JSON.parse(storedFavorites)
-    setFavorites(parsedFavorites)
-    saveToStorage()
+    if (parsedFavorites) {
+      setFavorites(parsedFavorites)
+      saveToStorage()
+    }
   }
 
   const saveToStorage = () => {
@@ -111,12 +116,11 @@ const HomeView = ({ query, page }) => {
 
   const jumpToPage = (page) => {
     setPageNumber(page)
-    fetchPlantList()
 
     if (search) {
-      history.push(`/search/${search}/${pageNumber}`)
+      history.push(`/search/${search}/${page}`)
     } else {
-      history.push(`/${pageNumber}`)
+      history.push(`/${page}`)
     }
   }
 
@@ -131,30 +135,30 @@ const HomeView = ({ query, page }) => {
   return (
     <HomeContext.Provider value={state}>
       {!error ?
-      <section>
-        <Header
-          toggleView={toggleView}
-          updateSearch={updateSearch}
-        />
-        {!loading ?
-          <CardContainer
-            favorites={favorites}
-            cardsOnDisplay={cardsOnDisplay}
-            addToFavorites={addToFavorites}
-            removeFromFavorites={removeFromFavorites}
-          /> :
-          <Loading />
-        }
-        {state.view === 'all' && 
-          <Footer
-            pageNumber={page}
-            maxPage={determineMaxPage()} 
-            jumpToPage={jumpToPage} 
+        <section>
+          <Header
+            toggleView={toggleView}
+            updateSearch={updateSearch}
           />
-        }
-      </section> :
-      <Error />
-    }
+          {!loading ?
+            <CardContainer
+              favorites={favorites}
+              cardsOnDisplay={cardsOnDisplay}
+              addToFavorites={addToFavorites}
+              removeFromFavorites={removeFromFavorites}
+            /> :
+            <Loading />
+          }
+          {state.view === 'all' &&
+            <Footer
+              pageNumber={page}
+              maxPage={determineMaxPage()}
+              jumpToPage={jumpToPage}
+            />
+          }
+        </section> :
+        <Error />
+      }
     </HomeContext.Provider>
   )
 }
