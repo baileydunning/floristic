@@ -33,3 +33,20 @@
 .page-input {
   outline: none;
 }
+
+.footer-credits {
+  background-color: $teal;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  a {
+    font-family: $paragraphFont;
+    color: white;
+    padding: 3%;
+    text-decoration: none;
+    &:hover {
+      transform: scale(1.05);
+      transition-duration: 0.5s;
+    }
+  }
+}
