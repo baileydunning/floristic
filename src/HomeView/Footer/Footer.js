@@ -3,28 +3,48 @@ import './Footer.scss'
 
 const Footer = ({ pageNumber, maxPage, jumpToPage }) => {
   const [maximum, setMaximum] = useState('10')
- 
+  const [pageInput, setPageInput] = useState(null)
+
   useEffect(() => {  
     if (maxPage.includes('&q')) {
       let newMax = maxPage.split('&')[0]
-      setMaximum(parseInt(newMax))
+      setMaximum(+newMax)
     } else {
-      setMaximum(parseInt(maxPage))
+      setMaximum(+maxPage)
     }
   }, [maximum, maxPage])
 
+  const submitPage = e => {
+    e.preventDefault()
+    jumpToPage(+pageInput)
+    setPageInput(null)
+  }
+
   return (
     <footer className='footer' data-testid='footer'>
-      { parseInt(pageNumber) > 1 && 
+      { +pageNumber > 1 && 
         <button 
-          onClick={() => jumpToPage(parseInt(pageNumber) - 1)}>
+          onClick={() => jumpToPage(+pageNumber - 1)}>
           ←
         </button>
       }
-      <p>{ pageNumber }</p>
-      { parseInt(pageNumber) < maximum && 
+      <form 
+        onSubmit={e => submitPage(e)}
+        className="page-form"
+      >
+        <input
+          type="number"
+          className="page-input"
+          placeholder={ pageNumber }
+          value={ pageInput }
+          min={ 0 }
+          max={ maximum }
+          onChange={e => setPageInput(e.target.value)}
+        />
+      </form>
+      { +pageNumber < maximum && 
         <button 
-          onClick={() => jumpToPage(parseInt(pageNumber) + 1)}>
+          onClick={() => jumpToPage(+pageNumber + 1)}>
           →
         </button>
       }
