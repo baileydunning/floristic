@@ -3,19 +3,22 @@ import './CardContainer.scss'
 
 const CardContainer = ({ favorites, cardsOnDisplay, addToFavorites, removeFromFavorites }) => {
   const evaluateFavorite = (id) => {
-    const isFavorite = favorites.find(plantCard => {
-      return plantCard.id === id
-    })
-
-    return isFavorite ? true : false
+    if (favorites) {
+      const isFavorite = favorites.find(plantCard => {
+        return plantCard.id === id
+      })
+      return isFavorite ? true : false
+    } else {
+      return false
+    }
   }
   
-  const plantCards = cardsOnDisplay.map(plant => {
+const plantCards = cardsOnDisplay?.map(plant => {
     return (
       <PlantCard
-        key={plant.id} 
+        key={plant.id}
         plant={plant}
-        isFavorite={evaluateFavorite(plant.id)} 
+        isFavorite={evaluateFavorite(plant.id)}
         addToFavorites={addToFavorites}
         removeFromFavorites={removeFromFavorites}
       />
