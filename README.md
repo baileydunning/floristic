@@ -7,15 +7,13 @@
 
 ## How To Access This Application
 
-### [Visit the live site](https://floristic.herokuapp.com/)
+### [Visit the live site](https://main.dsbyvryd64npv.amplifyapp.com/floristic/1)
 
 *On your terminal*:
 
 + `git clone git@github.com:baileydunning/floristic.git`
-+ `cd floristic` 
-   + Tab #1: `cd client && npm install` > `npm start`
-   + Tab #2: `cd proxy && npm install` > `nodemon server.js`
-
++ `cd floristic && npm install` 
++ `npm start` to run the app in your browser
 + `npm test` to run the test suite
 
 ![gif2](https://media.giphy.com/media/DRM3jtlkB7htuowXom/giphy.gif)
@@ -31,16 +29,8 @@
 
 ![gif3](https://media.giphy.com/media/oU1q3biKPfxYcu0WXQ/giphy.gif)
 
-## Next Steps
-+ Create more integration tests using reducer in `HomeView`
 
 ## Created By
 
 [Bailey Dunning](https://www.linkedin.com/in/baileydunning/)
-
-### Project Managers
-
-+ [Will Mitchell](https://github.com/wvmitchell)
-+ [Leta Keane](https://github.com/letakeane)
-
 
