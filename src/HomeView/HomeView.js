@@ -32,7 +32,9 @@ const HomeView = ({ query, page }) => {
   }, [search, page])
 
   useEffect(() => {
-    (state.plantList.length === 0) && fetchPlantList()
+    if (state.plantList?.length === 0) {
+      fetchPlantList()
+    }
 
     if (state.view === 'all') {
       setCardsOnDisplay(state.plantList)
@@ -47,6 +49,7 @@ const HomeView = ({ query, page }) => {
       getPlantList(pageNumber)
         .then(data => {
           makeFetchHappen(data)
+          console.log('data', data)
           history.push(`/${pageNumber}`)
         })
         .catch(err => setError(err))
@@ -125,7 +128,7 @@ const HomeView = ({ query, page }) => {
   }
 
   const determineMaxPage = () => {
-    if (state.links.last) {
+    if (state.links?.last) {
       return state.links.last.split('=')[1]
     } else {
       return '1'
